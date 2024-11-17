@@ -21,7 +21,8 @@ import jakarta.persistence.OneToMany;
 		    private Integer roomNumber; 
 			
 			@Enumerated(EnumType.STRING)
-			private RoomType roomType;          
+			private RoomType roomType; 
+			
 			private Double pricePerNight;   
 			
 			@Enumerated(EnumType.STRING)

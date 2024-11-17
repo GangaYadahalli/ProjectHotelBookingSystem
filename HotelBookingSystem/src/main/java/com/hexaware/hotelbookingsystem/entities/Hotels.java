@@ -62,11 +62,9 @@ import jakarta.persistence.OneToOne;
 		}
 
 
-
 		public void setHotelId(Integer hotelId) {
 			this.hotelId = hotelId;
 		}
-
 
 
 		public String getHotelName() {
@@ -74,11 +72,9 @@ import jakarta.persistence.OneToOne;
 		}
 
 
-
 		public void setHotelName(String hotelName) {
 			this.hotelName = hotelName;
 		}
-
 
 
 		public String getAddress() {
@@ -86,11 +82,9 @@ import jakarta.persistence.OneToOne;
 		}
 
 
-
 		public void setAddress(String address) {
 			this.address = address;
 		}
-
 
 
 		public String getCity() {
@@ -98,11 +92,9 @@ import jakarta.persistence.OneToOne;
 		}
 
 
-
 		public void setCity(String city) {
 			this.city = city;
 		}
-
 
 
 		public String getDescription() {
@@ -110,11 +102,9 @@ import jakarta.persistence.OneToOne;
 		}
 
 
-
 		public void setDescription(String description) {
 			this.description = description;
 		}
-
 
 
 		public Integer getContactNumber() {
@@ -122,11 +112,9 @@ import jakarta.persistence.OneToOne;
 		}
 
 
-
 		public void setContactNumber(Integer contactNumber) {
 			this.contactNumber = contactNumber;
 		}
-
 
 
 		public Double getRating() {
@@ -134,11 +122,19 @@ import jakarta.persistence.OneToOne;
 		}
 
 
-
 		public void setRating(Double rating) {
 			this.rating = rating;
 		}
 
+
+		public Users getUser() {
+			return user;
+		}
+
+
+		public void setUser(Users user) {
+			this.user = user;
+		}
 
 
 		public List<Rooms> getRooms() {
@@ -146,11 +142,9 @@ import jakarta.persistence.OneToOne;
 		}
 
 
-
 		public void setRooms(List<Rooms> rooms) {
 			this.rooms = rooms;
 		}
-
 
 
 		public List<Reviews> getReviews() {
@@ -158,10 +152,38 @@ import jakarta.persistence.OneToOne;
 		}
 
 
-
 		public void setReviews(List<Reviews> reviews) {
 			this.reviews = reviews;
 		}
+
+
+		public List<Bookings> getBookings() {
+			return bookings;
+		}
+
+
+		public void setBookings(List<Bookings> bookings) {
+			this.bookings = bookings;
+		}
+
+
+		public List<Payments> getPayments() {
+			return payments;
+		}
+
+
+		public void setPayments(List<Payments> payments) {
+			this.payments = payments;
+		}
+
+
+		@Override
+		public String toString() {
+			return "Hotels [hotelId=" + hotelId + ", hotelName=" + hotelName + ", address=" + address + ", city=" + city
+					+ ", description=" + description + ", contactNumber=" + contactNumber + ", rating=" + rating
+					+ ", user=" + user + "]";
+		}
+		
 	
 
 }
