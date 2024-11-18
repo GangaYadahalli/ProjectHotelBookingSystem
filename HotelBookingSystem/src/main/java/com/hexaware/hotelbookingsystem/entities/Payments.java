@@ -1,25 +1,50 @@
 package com.hexaware.hotelbookingsystem.entities;
+
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 
 @Entity
 public class Payments { 
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer paymentId; // Primary Key with auto-generation
 
-		@Id
-	    private Integer paymentId; 
- 
-	    private Double paymentAmount; 
-	    private LocalDate paymentDate; 
-	    private PaymentMethod paymentMethod; 
-	    private PaymentStatus paymentStatus; 
-	    private String transactionId; 
-	    private String remarks; 
-	    private LocalDate createdAt; 
+	@NotNull(message = "Payment amount is mandatory")
+    @Column(nullable = false)
+    private Double paymentAmount;
+
+    @NotNull(message = "Payment date is mandatory")
+    @Column(nullable = false)
+    private LocalDate paymentDate;
+
+    @NotNull(message = "Payment method is mandatory")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PaymentMethod paymentMethod;
+
+    @NotNull(message = "Payment status is mandatory")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PaymentStatus paymentStatus;
+
+    private String transactionId; // Optional field, no validation
+
+    private String remarks; // Optional field, no validation
+
+    @NotNull(message = "Created at date is mandatory")
+    @Column(nullable = false)
+    private LocalDate createdAt;
 
 	    @ManyToOne
 	    @JoinColumn(name = "user_id")
@@ -42,7 +67,7 @@ public class Payments {
 
 	    public Integer getPaymentId() { 
 
-	        return paymentId; 
+			return getPaymentId(); 
 
 	    } 
 	    public void setPaymentId(Integer paymentId) { 
