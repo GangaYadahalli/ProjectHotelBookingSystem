@@ -11,6 +11,9 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 	@Entity
 	public class Rooms {
@@ -28,7 +31,11 @@ import jakarta.persistence.OneToMany;
 			@Enumerated(EnumType.STRING)
 			private AvailabilityStatus availabilityStatus; 
 			
-			private Integer capacity;           
+			 @NotNull(message = "Capacity is required")
+			    @Min(value = 1, message = "Capacity must be at least 1")
+			private Integer capacity; 
+			
+			 @Size(max = 500, message = "Description must not exceed 500 characters")
 			private String description;
 			
 		
