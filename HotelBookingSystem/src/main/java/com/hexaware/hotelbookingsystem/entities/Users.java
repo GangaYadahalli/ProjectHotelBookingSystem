@@ -13,19 +13,34 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 	@Entity
 	public class Users {
 		@Id
-		//@GeneratedValue(strategy = GenerationType.IDENTITY) 
+		@GeneratedValue(strategy = GenerationType.IDENTITY) 
 		private Integer userId;
+		
+		
+		@Pattern(regexp="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,6}$" , message="enter a valid email")
 		private String email;
+		
+		@NotNull
 		private String password;
+		
+		
+		@Pattern(regexp="^[a-zA-Z]{2,50}$", message="Name should only contain letters and be 2 to 50 characters long")
 		private String name;
+		
+		@Pattern(regexp="^[0-9]{10}$", message="Phone number must be exactly 10 digits")
 		private Long phoneNumber;
+		
 		private LocalDate dateCreated;
 		
 		@Enumerated(EnumType.STRING)
 		private UserRole userrole;
+		
 		private LocalDate updatedAt;
 		
 		@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)

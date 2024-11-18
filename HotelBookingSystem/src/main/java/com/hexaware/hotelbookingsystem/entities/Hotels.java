@@ -8,19 +8,37 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 	@Entity
 	public class Hotels {
 		
 		@Id
-		private Integer hotelId;                
+		private Integer hotelId; 
+		
+		@Pattern(regexp="^[a-zA-Z]{2,50}$", message="Name should only contain letters and be 2 to 50 characters long")
 		 private String hotelName;
 		       
-		 private String address;     
-		 private String city;          
+		 private String address; 
+		 
+		 @NotBlank(message = "City is required")
+		 private String city;  
+		 
+		 @Size(max = 500, message = "Description must not exceed 500 characters")
 		 private String description;
+		 
+		 @Pattern(regexp="^[0-9]{10}$", message="Phone number must be exactly 10 digits")
 		 private Integer contactNumber;
+		 
+		 @NotNull(message = "Rating is required")
+		 @DecimalMin(value = "0.0", message = "Rating must be at least 0.0")
+		 @DecimalMax(value = "5.0", message = "Rating must be at most 5.0")
 		 private Double rating;
 		 
 		 @OneToOne
