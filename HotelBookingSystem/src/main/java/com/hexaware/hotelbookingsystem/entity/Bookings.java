@@ -1,9 +1,7 @@
-package com.hexaware.hotelbookingsystem.entities;
+package com.hexaware.hotelbookingsystem.entity;
 import java.time.LocalDate;
 
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 public class Bookings { 
 	
