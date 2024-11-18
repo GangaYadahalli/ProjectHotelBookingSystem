@@ -1,11 +1,14 @@
 package com.hexaware.hotelbookingsystem.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.hexaware.hotelbookingsystem.entities.Bookings;
+import com.hexaware.hotelbookingsystem.entities.Bookings.BookingStatus;
 
 public class BookingsServiceImp implements IBookingsService {
 
+	@Override
 	public Bookings createBooking(Bookings booking) {
 		// TODO Auto-generated method stub
 		return null;
@@ -42,13 +45,19 @@ public class BookingsServiceImp implements IBookingsService {
 	}
 
 	@Override
+	public List<Bookings> getBookingsByStatus(BookingStatus status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public List<Bookings> getBookingsByRoomId(Integer roomId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Bookings> getBookingsByStatus(Bookings status) {
+	public List<Bookings> getBookingsByDateRange(LocalDate startDate, LocalDate endDate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
