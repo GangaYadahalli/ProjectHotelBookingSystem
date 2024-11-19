@@ -53,6 +53,11 @@ public class Payments {
 	    @ManyToOne
 	    @JoinColumn(name = "booking_id")
 	    private Bookings booking; // Many-to-One relationship with Bookings
+	    
+	    @ManyToOne
+	    @JoinColumn(name = "hotel_id")
+	    private Hotels hotel; 
+
 	    public enum PaymentMethod { 
 
 	        CREDIT_CARD, DEBIT_CARD, PAYPAL 

@@ -52,7 +52,10 @@ public class Bookings {
 	    private String specialRequests; // Optional, so no validation required
 
 	  
-	    
+	    @ManyToOne
+	    @JoinColumn(name = "payment_id")
+	    private Payments payment; 
+
 	    @ManyToOne
 	    @JoinColumn(name = "user_id", nullable = false)
 	    private Users user; // Many-to-One relationship with Users (GUEST users)
