@@ -25,4 +25,3 @@ public interface BookingsRepository extends JpaRepository<Bookings, Integer> {
     List<Bookings> findByBookingDateBetween(LocalDate startDate, LocalDate endDate);
     
 }
-

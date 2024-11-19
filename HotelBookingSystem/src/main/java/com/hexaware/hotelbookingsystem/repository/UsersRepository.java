@@ -16,10 +16,10 @@ public interface UsersRepository extends JpaRepository<Users ,Integer> {
 	
 	@Modifying
 	  @Query("update Users u set u.phoneNumber=:phno where u.userId=:id")
-	  Users updatePhoneNumber(Long phoneNumber ,Integer userId);
+	  int updatePhoneNumber(Long phno ,Integer id);
 	
 	@Modifying
 	  @Query("update Users u set u.password=:pword where u.userId=:id")
-	Users updatePassword(String password,Integer userId);
+	int updatePassword(String pword,Integer id);
 
 }

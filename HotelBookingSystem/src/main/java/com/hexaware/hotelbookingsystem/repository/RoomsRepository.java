@@ -12,10 +12,10 @@ public interface RoomsRepository extends JpaRepository<Rooms ,Integer> {
 	
 	@Modifying
 	  @Query("update Rooms r set r.pricePerNight=:price where r.roomId=:id")
-	  Rooms updatepricePerNight(Integer pricePerNight, Integer roomId);
+	  int updatepricePerNight(Integer price, Integer id);
 	
 	@Modifying
 	  @Query("update Rooms r set r.capacity=:capacity where r.roomId=:id")
-	Rooms updateCapacity(Integer capacity, Integer roomId);
+	int  updateCapacity(Integer capacity, Integer id);
 
 }

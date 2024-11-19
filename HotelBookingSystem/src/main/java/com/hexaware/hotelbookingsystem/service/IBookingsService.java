@@ -1,3 +1,4 @@
+
 package com.hexaware.hotelbookingsystem.service;
 
 
@@ -34,4 +35,3 @@ public interface IBookingsService {
     
     List<Bookings> getBookingsByDateRange(LocalDate startDate, LocalDate endDate);
 }
-

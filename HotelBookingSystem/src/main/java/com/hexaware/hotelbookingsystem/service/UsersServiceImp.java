@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.hotelbookingsystem.dto.UsersDto;
 import com.hexaware.hotelbookingsystem.entities.Users;
 import com.hexaware.hotelbookingsystem.repository.UsersRepository;
 
@@ -19,14 +20,39 @@ public class UsersServiceImp implements IUsersService {
 	UsersRepository repo;
 	
 	@Override
-	public Users addUsers(Users user) {
+	public Users addUsers(UsersDto userDto) {
+		
+		Users user = new Users();
+		
+		user.setUserId(userDto.getUserId());
+		user.setEmail(userDto.getEmail());
+		user.setPassword(userDto.getPassword());
+		user.setName(userDto.getName());
+		user.setPhoneNumber(userDto.getPhoneNumber());
+		user.setDateCreated(userDto.getDateCreated());
+		user.setUserrole(Users.UserRole.valueOf(userDto.getUserrole().name()));
+		user.setUpdatedAt(userDto.getUpdatedAt());
+		
+	
 		
 		return repo.save(user);
 	}
 	
 
 	@Override
-	public Users updateUsers(Users user) {
+	public Users updateUsers(UsersDto userDto) {
+		
+        Users user = new Users();
+		
+		user.setUserId(userDto.getUserId());
+		user.setEmail(userDto.getEmail());
+		user.setPassword(userDto.getPassword());
+		user.setName(userDto.getName());
+		user.setPhoneNumber(userDto.getPhoneNumber());
+		user.setDateCreated(userDto.getDateCreated());
+		user.setUserrole(Users.UserRole.valueOf(userDto.getUserrole().name()));
+		user.setUpdatedAt(userDto.getUpdatedAt());
+		
 		
 		return repo.save(user);
 	}
@@ -52,22 +78,46 @@ public class UsersServiceImp implements IUsersService {
 
 
 	@Override
-	public void deleteByName(String name) {
+	public int deleteByName(String name) {
 		
-		repo.deleteByName(name);
-		
+		return repo.deleteByName(name);
 	}
+
+
 	@Override
-	public Users updatePhoneNumber(Long phoneNumber, Integer userId) {
+	public int updatePhoneNumber(Long phoneNumber, Integer userId) {
 		
 		return repo.updatePhoneNumber(phoneNumber, userId);
 	}
 
+
 	@Override
-	public Users updatePassword(String password, Integer userId) {
+	public int updatePassword(String password, Integer userId) {
 		
 		return repo.updatePassword(password, userId);
 	}
+
+
+
+
+
+//	@Override
+//	public void deleteByName(String name) {
+//		
+//		repo.deleteByName(name);
+//		
+//	}
+//	@Override
+//	public Users updatePhoneNumber(Long phoneNumber, Integer userId) {
+//		
+//		return repo.updatePhoneNumber(phoneNumber, userId);
+//	}
+//
+//	@Override
+//	public Users updatePassword(String password, Integer userId) {
+//		
+//		return repo.updatePassword(password, userId);
+//	}
 
 
 

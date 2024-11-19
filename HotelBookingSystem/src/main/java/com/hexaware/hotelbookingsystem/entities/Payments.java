@@ -1,3 +1,4 @@
+
 package com.hexaware.hotelbookingsystem.entities;
 
 import java.time.LocalDate;

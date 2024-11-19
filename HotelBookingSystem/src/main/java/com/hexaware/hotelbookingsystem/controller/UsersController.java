@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.hotelbookingsystem.dto.UsersDto;
 import com.hexaware.hotelbookingsystem.entities.Users;
 import com.hexaware.hotelbookingsystem.exception.UserNotFoundException;
 import com.hexaware.hotelbookingsystem.service.IUsersService;
@@ -25,14 +26,14 @@ public class UsersController {
 	IUsersService service;
 	
 	@PostMapping("/insert")
-	  public  Users  insert(@RequestBody Users user) {
+	  public  Users  insert(@RequestBody UsersDto userDto) {
 		
-		return  service.addUsers(user);
+		return  service.addUsers(userDto);
 	  }
 	@PutMapping("/update")
-	  public  Users    update(@RequestBody Users user) {
+	  public  Users    update(@RequestBody UsersDto userDto) {
 		
-		  return service.updateUsers(user);
+		  return service.updateUsers(userDto);
 		  
 	  }
 	@DeleteMapping("/delete/{userId}")
@@ -64,16 +65,17 @@ public class UsersController {
 		service.deleteByName(name);
 		return "Record deleted for name " +name;
 	  }
-	  @PutMapping("/updatePhoneNumber/{phoneNumber}{userId}")
-	  public  Users    updatePhoneNumber(@PathVariable Long phoneNumber, @PathVariable Integer userId) {
+	  
+	  @PutMapping("/updatePhoneNumber/{phno}{id}")
+	  public  int   updatePhoneNumber(@PathVariable Long phno, @PathVariable Integer id) {
 		
-		  return service.updatePhoneNumber(phoneNumber, userId);
+		  return service.updatePhoneNumber(phno, id);
 		  
 	  }
 	  @PutMapping("/updatePassword/{password}{userId}")
-	  public  Users    updatePassword(@PathVariable String password, @PathVariable Integer userId) {
+	  public  int    updatePassword(@PathVariable String pword, @PathVariable Integer id) {
 		
-		  return service.updatePassword(password, userId);
+		  return service.updatePassword(pword, id);
 		  
 	  }
 
