@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hexaware.hotelbookingsystem.entities.Payments;
+import com.hexaware.hotelbookingsystem.exception.PaymentNotFoundException;
 import com.hexaware.hotelbookingsystem.repository.PaymentsRepository;
 
 public class PaymentsServiceImp implements IPaymentsService {
@@ -22,7 +23,7 @@ public class PaymentsServiceImp implements IPaymentsService {
     // 2. Get payment by ID
     @Override
     public Payments getPaymentById(Integer paymentId) {
-        return repo.findById(paymentId).orElse(null); // Retrieve payment or return null
+    	return repo.findById(paymentId).orElseThrow(() -> new PaymentNotFoundException("Payment not found with ID: " + paymentId));
     }
 
     // 3. Get all payments by user ID
@@ -38,7 +39,7 @@ public class PaymentsServiceImp implements IPaymentsService {
     }
 
     // 5. Update payment status
-    @Override
+   /* @Override
     public Payments updatePaymentStatus(Payments payment) {
         Optional<Payments> existingPayment = repo.findById(payment.getPaymentId());
         if (existingPayment.isPresent()) {
@@ -47,6 +48,16 @@ public class PaymentsServiceImp implements IPaymentsService {
             return repo.save(updatedPayment);
         }
         return null; // Return null if payment not found
+    }
+*/
+    
+    @Override
+    public Payments updatePaymentStatus(Payments payment) {
+        Payments existingPayment = repo.findById(payment.getPaymentId())
+                .orElseThrow(() -> new PaymentNotFoundException("Payment not found with ID: " + payment.getPaymentId()));
+        
+        existingPayment.setPaymentStatus(payment.getPaymentStatus());
+        return repo.save(existingPayment);
     }
 
 }

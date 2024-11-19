@@ -1,6 +1,7 @@
 package com.hexaware.hotelbookingsystem.service;
 
 import java.time.LocalDate;
+import com.hexaware.hotelbookingsystem.exception.BookingNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class BookingsServiceImp implements IBookingsService {
 	@Override
 	public Bookings getBookingById(Integer bookingId) {
 		// TODO Auto-generated method stub
-		return repo.findById(bookingId).orElse(null);
+		return repo.findById(bookingId).orElseThrow(() -> new BookingNotFoundException("Booking not found with ID: " + bookingId));
 	}
 
 	// 3. Get bookings by user ID
@@ -53,11 +54,10 @@ public class BookingsServiceImp implements IBookingsService {
     // 6. Cancel a booking by ID
     @Override
     public void cancelBookingById(Integer bookingId) {
-        Optional<Bookings> optionalBooking = repo.findById(bookingId);
-        optionalBooking.ifPresent(booking -> {
-            booking.setBookingStatus(BookingStatus.CANCELLED);
-            repo.save(booking);
-        });
+        Bookings booking = repo.findById(bookingId)
+                .orElseThrow(() -> new BookingNotFoundException("Booking not found with ID: " + bookingId));
+        booking.setBookingStatus(BookingStatus.CANCELLED);
+        repo.save(booking);
     }
 
     // 7. Get bookings by status
