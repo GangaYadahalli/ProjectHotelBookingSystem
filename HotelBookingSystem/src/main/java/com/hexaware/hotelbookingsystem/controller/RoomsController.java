@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hexaware.hotelbookingsystem.entities.Hotels;
 import com.hexaware.hotelbookingsystem.entities.Rooms;
 import com.hexaware.hotelbookingsystem.exception.RoomNotFoundException;
 import com.hexaware.hotelbookingsystem.service.IRoomsService;

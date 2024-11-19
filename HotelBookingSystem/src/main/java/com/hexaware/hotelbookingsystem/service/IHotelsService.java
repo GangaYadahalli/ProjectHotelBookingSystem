@@ -3,7 +3,6 @@ package com.hexaware.hotelbookingsystem.service;
 import java.util.List;
 
 import com.hexaware.hotelbookingsystem.entities.Hotels;
-import com.hexaware.hotelbookingsystem.entities.Rooms;
 
 public interface IHotelsService {
 		public Hotels addHotels(Hotels hotel);
