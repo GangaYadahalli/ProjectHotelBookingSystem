@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.hotelbookingsystem.dto.HotelsDto;
 import com.hexaware.hotelbookingsystem.entities.Hotels;
 import com.hexaware.hotelbookingsystem.repository.HotelsRepository;
 
@@ -18,13 +19,35 @@ public class HotelsServiceImp implements IHotelsService {
 	HotelsRepository repo;
 
 	@Override
-	public Hotels addHotels(Hotels hotel) {
+	public Hotels addHotels(HotelsDto hotelDto) {
+		Hotels hotel=new Hotels();
+		
+		hotel.setHotelId(hotelDto.getHotelId());
+		hotel.setHotelName(hotelDto.getHotelName());
+		hotel.setAddress(hotelDto.getAddress());
+		hotel.setCity(hotelDto.getCity());
+		hotel.setDescription(hotelDto.getDescription());
+		hotel.setContactNumber(hotelDto.getContactNumber());
+		hotel.setRating(hotelDto.getRating());
+		//hotel.setUser(hotelDto.getUserId());
+		
 		
 		return repo.save(hotel);
 	}
 
 	@Override
-	public Hotels updateHotels(Hotels hotel) {
+	public Hotels updateHotels(HotelsDto hotelDto) {
+		
+	Hotels hotel=new Hotels();
+		
+		hotel.setHotelId(hotelDto.getHotelId());
+		hotel.setHotelName(hotelDto.getHotelName());
+		hotel.setAddress(hotelDto.getAddress());
+		hotel.setCity(hotelDto.getCity());
+		hotel.setDescription(hotelDto.getDescription());
+		hotel.setContactNumber(hotelDto.getContactNumber());
+		hotel.setRating(hotelDto.getRating());
+		//hotel.setUser(hotelDto.getUserId());
 		
 		return repo.save(hotel);
 	}
@@ -49,22 +72,16 @@ public class HotelsServiceImp implements IHotelsService {
 	}
 
 	@Override
-	public List<Hotels> filterHotelsByLocation(String city) {
+	public List<Hotels> getByCity(String city) {
 		
-		return repo.filterHotelsByLocation(city);
+		return repo.findByCity(city);
 	}
 
 	@Override
-	public List<Hotels> filterHotelsByRating(Double rating) {
+	public List<Hotels> getByRating(Double rating) {
 		
-		return repo.filterHotelsByRating(rating);
+		return repo.findByRating(rating);
 	}
-
-
-
-
-
-
 
 
 

@@ -21,7 +21,5 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<String> handleRoomNotFoundException() {
 	    return new ResponseEntity<>("Invalid input format please enter valid roomId  ",HttpStatus.BAD_REQUEST);
 	}
-	
-
 
 }

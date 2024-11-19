@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.hotelbookingsystem.dto.RoomsDto;
 import com.hexaware.hotelbookingsystem.entities.Rooms;
 import com.hexaware.hotelbookingsystem.exception.RoomNotFoundException;
 import com.hexaware.hotelbookingsystem.service.IRoomsService;
@@ -23,14 +24,14 @@ public class RoomsController {
 	IRoomsService service;
 	
 	@PostMapping("/insert")
-	  public  Rooms  insert(@RequestBody Rooms room) {
+	  public  Rooms  insert(@RequestBody RoomsDto roomDto) {
 		
-		return  service.addRooms(room);
+		return  service.addRooms(roomDto);
 	  }
 	@PutMapping("/update")
-	  public Rooms   update(@RequestBody Rooms room) {
+	  public Rooms   update(@RequestBody RoomsDto roomDto) {
 		
-		  return service.updateRooms(room);
+		  return service.updateRooms(roomDto);
 		  
 	  }
 	@DeleteMapping("/delete/{roomId}")
@@ -58,16 +59,16 @@ public class RoomsController {
 		  
 	  }
 	  
-		@PutMapping("/updatePricePerNight/{pricePerNight}/{roomId}")
-		  public Rooms   updatePricePerNight(@PathVariable Integer pricePerNight,@PathVariable Integer roomId) {
+		@PutMapping("/updatePricePerNight/{price}/{id}")
+		  public int  updatePricePerNight(@PathVariable Integer price ,@PathVariable Integer id) {
 			
-			  return service.updatepricePerNight(pricePerNight, roomId);
+			  return service.updatepricePerNight(price, id);
 			  
 		  }
-		@PutMapping("/updateCapacity/{capacity}/{hotelId}")
-		  public Rooms  updateCapacity(@PathVariable Integer capacity ,@PathVariable Integer roomId) {
+		@PutMapping("/updateCapacity/{capacity}/{id}")
+		  public int  updateCapacity(@PathVariable Integer capacity ,@PathVariable Integer id) {
 			
-			  return service.updateCapacity(capacity, roomId);
+			  return service.updateCapacity(capacity, id);
 			  
 		  }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.hotelbookingsystem.dto.RoomsDto;
 import com.hexaware.hotelbookingsystem.entities.Rooms;
 import com.hexaware.hotelbookingsystem.repository.RoomsRepository;
 
@@ -17,13 +18,29 @@ public class RoomsServiceImp implements IRoomsService {
 	RoomsRepository repo;
 
 	@Override
-	public Rooms addRooms(Rooms room) {
+	public Rooms addRooms(RoomsDto roomDto) {
+		Rooms room=new Rooms();
+		room.setRoomId(roomDto.getRoomId());
+		room.setRoomNumber(roomDto.getRoomNumber());
+		room.setRoomType(Rooms.RoomType.valueOf(roomDto.getRoomType().name()));
+		room.setPricePerNight(roomDto.getPricePerNight());
+		room.setAvailabilityStatus(Rooms.AvailabilityStatus.valueOf(roomDto.getAvailabilityStatus().name()));
+		room.setCapacity(roomDto.getCapacity());
+		room.setDescription(roomDto.getDescription());
 		
 		return repo.save(room);
 	}
 
 	@Override
-	public Rooms updateRooms(Rooms room) {
+	public Rooms updateRooms(RoomsDto roomDto) {
+		Rooms room=new Rooms();
+		room.setRoomId(roomDto.getRoomId());
+		room.setRoomNumber(roomDto.getRoomNumber());
+		room.setRoomType(Rooms.RoomType.valueOf(roomDto.getRoomType().name()));
+		room.setPricePerNight(roomDto.getPricePerNight());
+		room.setAvailabilityStatus(Rooms.AvailabilityStatus.valueOf(roomDto.getAvailabilityStatus().name()));
+		room.setCapacity(roomDto.getCapacity());
+		room.setDescription(roomDto.getDescription());
 		
 		
 		return repo.save(room);
@@ -49,13 +66,13 @@ public class RoomsServiceImp implements IRoomsService {
 	}
 
 	@Override
-	public Rooms updatepricePerNight(Integer pricePerNight, Integer roomId) {
+	public int updatepricePerNight(Integer pricePerNight, Integer roomId) {
 		
 		return repo.updatepricePerNight(pricePerNight, roomId);
 	}
 
 	@Override
-	public Rooms updateCapacity(Integer capacity, Integer roomId) {
+	public int updateCapacity(Integer capacity, Integer roomId) {
 		
 		return repo.updateCapacity(capacity, roomId);
 	}

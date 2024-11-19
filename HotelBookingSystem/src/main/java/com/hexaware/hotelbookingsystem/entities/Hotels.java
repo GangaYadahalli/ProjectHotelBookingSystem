@@ -34,7 +34,7 @@ import jakarta.validation.constraints.Size;
 		 private String description;
 		 
 		 @Pattern(regexp="^[0-9]{10}$", message="Phone number must be exactly 10 digits")
-		 private Integer contactNumber;
+		 private Long contactNumber;
 		 
 		 @NotNull(message = "Rating is required")
 		 @DecimalMin(value = "0.0", message = "Rating must be at least 0.0")
@@ -63,7 +63,7 @@ import jakarta.validation.constraints.Size;
 		
 
 		public Hotels(Integer hotelId, String hotelName, String address, String city, String description,
-				Integer contactNumber, Double rating) {
+				Long contactNumber, Double rating) {
 			super();
 			this.hotelId = hotelId;
 			this.hotelName = hotelName;
@@ -125,12 +125,12 @@ import jakarta.validation.constraints.Size;
 		}
 
 
-		public Integer getContactNumber() {
+		public Long getContactNumber() {
 			return contactNumber;
 		}
 
 
-		public void setContactNumber(Integer contactNumber) {
+		public void setContactNumber(Long contactNumber) {
 			this.contactNumber = contactNumber;
 		}
 

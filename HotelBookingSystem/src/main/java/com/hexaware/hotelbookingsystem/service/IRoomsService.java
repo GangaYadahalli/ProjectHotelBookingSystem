@@ -2,13 +2,14 @@ package com.hexaware.hotelbookingsystem.service;
 
 import java.util.List;
 
+import com.hexaware.hotelbookingsystem.dto.RoomsDto;
 import com.hexaware.hotelbookingsystem.entities.Rooms;
 
 public interface IRoomsService {
 	
-	 public Rooms addRooms(Rooms room);
+	 public Rooms addRooms(RoomsDto roomDto);
 		
-		public Rooms updateRooms(Rooms room);
+		public Rooms updateRooms(RoomsDto roomDto);
 		
 		public Rooms getRoomById(Integer roomId);
 		
@@ -16,8 +17,8 @@ public interface IRoomsService {
 		
 		public List<Rooms> getAllRooms();
 		
-		public Rooms updatepricePerNight(Integer pricePerNight, Integer roomId);
+		public int updatepricePerNight(Integer pricePerNight, Integer roomId);
 		
-		public Rooms updateCapacity(Integer capacity, Integer roomId);
+		public int updateCapacity(Integer capacity, Integer roomId);
 
 }

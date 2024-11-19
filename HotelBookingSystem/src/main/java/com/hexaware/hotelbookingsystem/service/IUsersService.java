@@ -2,15 +2,16 @@ package com.hexaware.hotelbookingsystem.service;
 
 import java.util.List;
 
+import com.hexaware.hotelbookingsystem.dto.UsersDto;
 import com.hexaware.hotelbookingsystem.entities.Users;
 
 
 public interface IUsersService {
 	
 	
-   public Users addUsers(Users user);
+   public Users addUsers(UsersDto userDto);
 	
-	public Users updateUsers(Users user);
+	public Users updateUsers(UsersDto userDto);
 	
 	public Users getUsersById(Integer userId);
 	
@@ -18,11 +19,12 @@ public interface IUsersService {
 	
 	public List<Users> getAllUsers();
 	
-    public void  deleteByName(String name);
+    public int deleteByName(String name);
 	
-	public Users updatePhoneNumber(Long phoneNumber ,Integer userId);
+	public int updatePhoneNumber(Long phoneNumber ,Integer userId);
 	
-	public Users updatePassword(String password,Integer userId);
+	public int updatePassword(String password,Integer userId);
 	
 
+	
 }
