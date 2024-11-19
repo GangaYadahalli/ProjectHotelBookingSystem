@@ -55,7 +55,7 @@ public class Payments {
 	    private Bookings booking; // Many-to-One relationship with Bookings
 	    
 	    @ManyToOne
-	    @JoinColumn(name = "hotel_id")
+	    @JoinColumn(name = "hotelId")
 	    private Hotels hotel; 
 
 	    public enum PaymentMethod { 

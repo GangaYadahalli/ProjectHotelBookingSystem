@@ -20,13 +20,13 @@ public class BookingsServiceImp implements IBookingsService {
 	  
 	@Override
 	public Bookings createBooking(Bookings booking) {
-		// TODO Auto-generated method stub
+		
 		return repo.save(booking);
 	}
 
 	@Override
 	public Bookings getBookingById(Integer bookingId) {
-		// TODO Auto-generated method stub
+		
 		return repo.findById(bookingId).orElseThrow(() -> new BookingNotFoundException("Booking not found with ID: " + bookingId));
 	}
 
