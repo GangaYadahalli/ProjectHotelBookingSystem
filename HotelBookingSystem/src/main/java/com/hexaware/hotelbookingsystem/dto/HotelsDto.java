@@ -12,12 +12,12 @@ public class HotelsDto {
 	 private Long contactNumber;
 	 private Double rating;
 	 
-	 private Users userId;
+	 private Integer userId;
 	public HotelsDto() {
 		super();
 	}
 	public HotelsDto(Integer hotelId, String hotelName, String address, String city, String description,
-			Long contactNumber, Double rating,Users userId) {
+			Long contactNumber, Double rating,Integer userId) {
 		super();
 		this.hotelId = hotelId;
 		this.hotelName = hotelName;
@@ -70,10 +70,10 @@ public class HotelsDto {
 	public void setRating(Double rating) {
 		this.rating = rating;
 	}
-	public Users getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(Users userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	

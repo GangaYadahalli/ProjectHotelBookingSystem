@@ -48,18 +48,16 @@ public class Payments {
     private LocalDate createdAt;
 
 	    @ManyToOne
-	    @JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = false)
+	    @JoinColumn(name = "user_id")
 	    private Users user; // Many-to-One relationship with Users
 
 	    @ManyToOne
-	    @JoinColumn(name = "booking_id", referencedColumnName = "bookingId",nullable = false)
+	    @JoinColumn(name = "booking_id")
 	    private Bookings booking; // Many-to-One relationship with Bookings
 	    
-	    
-
 	    @ManyToOne
-	    @JoinColumn(name = "hotel_id", referencedColumnName = "hotelId", nullable = false) // Ensure correct column mapping
-	    private Hotels hotel;
+	    @JoinColumn(name = "hotel_id")
+	    private Hotels hotel; 
 
 	    public enum PaymentMethod { 
 

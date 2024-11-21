@@ -11,6 +11,7 @@ public class RoomsDto {
 	private Integer capacity; 
 	private String description;
 	
+	private Integer hotelId;
 	public enum RoomType {
 		SINGLE, DOUBLE, SUITE
 	}
@@ -22,7 +23,7 @@ public class RoomsDto {
 		super();
 	}
 	public RoomsDto(Integer roomId, Integer roomNumber, RoomType roomType, Double pricePerNight,
-			AvailabilityStatus availabilityStatus, Integer capacity, String description) {
+			AvailabilityStatus availabilityStatus, Integer capacity, String description,Integer hotelId) {
 		super();
 		this.roomId = roomId;
 		this.roomNumber = roomNumber;
@@ -31,6 +32,7 @@ public class RoomsDto {
 		this.availabilityStatus = availabilityStatus;
 		this.capacity = capacity;
 		this.description = description;
+		this.hotelId=hotelId;
 	}
 	public Integer getRoomId() {
 		return roomId;
@@ -73,6 +75,12 @@ public class RoomsDto {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Integer getHotelId() {
+		return hotelId;
+	}
+	public void setHotelId(Integer hotelId) {
+		this.hotelId = hotelId;
 	}
 	
 	

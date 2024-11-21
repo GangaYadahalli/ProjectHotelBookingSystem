@@ -45,6 +45,7 @@ import jakarta.validation.constraints.Size;
 		 @JoinColumn(name = "user_id") 
 		 private Users user;
 		 
+		
 		 @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL ,  fetch = FetchType.LAZY)
 		 private List<Rooms> rooms; 
 
@@ -193,6 +194,7 @@ import jakarta.validation.constraints.Size;
 		public void setPayments(List<Payments> payments) {
 			this.payments = payments;
 		}
+	
 
 
 		@Override

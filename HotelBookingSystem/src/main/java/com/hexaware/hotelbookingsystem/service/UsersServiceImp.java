@@ -2,6 +2,8 @@ package com.hexaware.hotelbookingsystem.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ public class UsersServiceImp implements IUsersService {
 	@Autowired 
 	UsersRepository repo;
 	
+	Logger logger=LoggerFactory.getLogger(UsersServiceImp.class);
+	
 	@Override
 	public Users addUsers(UsersDto userDto) {
 		
@@ -34,7 +38,7 @@ public class UsersServiceImp implements IUsersService {
 		user.setUpdatedAt(userDto.getUpdatedAt());
 		
 	
-		
+		logger.info("Users add service is called");
 		return repo.save(user);
 	}
 	
@@ -53,7 +57,7 @@ public class UsersServiceImp implements IUsersService {
 		user.setUserrole(Users.UserRole.valueOf(userDto.getUserrole().name()));
 		user.setUpdatedAt(userDto.getUpdatedAt());
 		
-		
+		logger.info("Users update service is called");
 		return repo.save(user);
 	}
 
@@ -66,13 +70,18 @@ public class UsersServiceImp implements IUsersService {
 	@Override
 	public void deleteUsersById(Integer userId) {
 		
+		
 		repo.deleteById(userId);
+		
+		logger.debug("Record deleted by service");
 		
 	}
 
 	@Override
 	public List<Users> getAllUsers() {
 		
+		
+		logger.info("All records of users is fetched");
 		return repo.findAll();
 	}
 
@@ -99,25 +108,6 @@ public class UsersServiceImp implements IUsersService {
 
 
 
-
-
-//	@Override
-//	public void deleteByName(String name) {
-//		
-//		repo.deleteByName(name);
-//		
-//	}
-//	@Override
-//	public Users updatePhoneNumber(Long phoneNumber, Integer userId) {
-//		
-//		return repo.updatePhoneNumber(phoneNumber, userId);
-//	}
-//
-//	@Override
-//	public Users updatePassword(String password, Integer userId) {
-//		
-//		return repo.updatePassword(password, userId);
-//	}
 
 
 

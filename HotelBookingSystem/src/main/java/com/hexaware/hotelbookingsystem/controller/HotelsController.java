@@ -2,6 +2,8 @@ package com.hexaware.hotelbookingsystem.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +25,19 @@ public class HotelsController {
 	@Autowired
 	IHotelsService service;
 	
+	Logger logger=LoggerFactory.getLogger(HotelsController.class);
+	
 	@PostMapping("/insert")
 	  public  Hotels  insert(@RequestBody HotelsDto hotelDto) {
+		
+		logger.info("Hotels object added successfully");
 		
 		return  service.addHotels(hotelDto);
 	  }
 	@PutMapping("/update")
 	  public Hotels   update(@RequestBody HotelsDto hotelDto) {
+		
+		logger.info("Hotels object updated successfully");
 		
 		  return service.updateHotels(hotelDto);
 		  

@@ -2,10 +2,13 @@ package com.hexaware.hotelbookingsystem.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.hotelbookingsystem.dto.RoomsDto;
+import com.hexaware.hotelbookingsystem.entities.Hotels;
 import com.hexaware.hotelbookingsystem.entities.Rooms;
 import com.hexaware.hotelbookingsystem.repository.RoomsRepository;
 
@@ -16,6 +19,10 @@ import jakarta.transaction.Transactional;
 public class RoomsServiceImp implements IRoomsService {
 	@Autowired 
 	RoomsRepository repo;
+	@Autowired
+	IHotelsService service;
+	
+	Logger logger=LoggerFactory.getLogger(RoomsServiceImp.class);
 
 	@Override
 	public Rooms addRooms(RoomsDto roomDto) {
@@ -27,7 +34,10 @@ public class RoomsServiceImp implements IRoomsService {
 		room.setAvailabilityStatus(Rooms.AvailabilityStatus.valueOf(roomDto.getAvailabilityStatus().name()));
 		room.setCapacity(roomDto.getCapacity());
 		room.setDescription(roomDto.getDescription());
+		Hotels hotel=service.getHotelById(roomDto.getHotelId());
+		room.setHotel(hotel);
 		
+		logger.info("Rooms add service is called");
 		return repo.save(room);
 	}
 
@@ -42,7 +52,7 @@ public class RoomsServiceImp implements IRoomsService {
 		room.setCapacity(roomDto.getCapacity());
 		room.setDescription(roomDto.getDescription());
 		
-		
+		logger.info("Rooms update service is called");
 		return repo.save(room);
 	}
 
@@ -56,12 +66,13 @@ public class RoomsServiceImp implements IRoomsService {
 	public void deleteRoomsById(Integer roomId) {
 		
 		repo.deleteById(roomId);
+		logger.debug("Record deleted by service");
 		
 	}
 
 	@Override
 	public List<Rooms> getAllRooms() {
-		
+		logger.info("All records of rooms is fetched");
 		return  repo.findAll();
 	}
 

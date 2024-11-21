@@ -38,11 +38,11 @@ import jakarta.validation.constraints.NotNull;
 	    private LocalDateTime updatedAt; // Optional field, no validation
 
 	    @ManyToOne
-	    @JoinColumn(name = "user_id",referencedColumnName = "userId", nullable = false)
+	    @JoinColumn(name = "user_id", nullable = false)
 	    private Users user; // Many-to-One relationship with Users
 
 	    @ManyToOne
-	    @JoinColumn(name = "hotel_id",referencedColumnName = "hotelId", nullable = false)
+	    @JoinColumn(name = "hotel_id", nullable = false)
 	    private Hotels hotel; // Many-to-One relationship with Hotels
 
 		public Reviews() {
