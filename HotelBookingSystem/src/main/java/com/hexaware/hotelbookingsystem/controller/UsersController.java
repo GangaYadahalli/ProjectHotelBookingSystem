@@ -1,3 +1,8 @@
+/*
+ *Controller  for Users
+ *Author : Ganga
+ *Date: 2024-11-16
+ * */
 package com.hexaware.hotelbookingsystem.controller;
 
 import java.util.List;
@@ -18,8 +23,6 @@ import com.hexaware.hotelbookingsystem.dto.UsersDto;
 import com.hexaware.hotelbookingsystem.entities.Users;
 import com.hexaware.hotelbookingsystem.exception.UserNotFoundException;
 import com.hexaware.hotelbookingsystem.service.IUsersService;
-
-
 
 
 @RestController

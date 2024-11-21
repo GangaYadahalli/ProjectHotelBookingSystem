@@ -1,4 +1,8 @@
-package com.hexaware.hotelbookingsystem.entities;
+/*
+ *Entity class for hotels
+ *Author :Ganga
+ *Date: 2024-11-07
+ * */package com.hexaware.hotelbookingsystem.entities;
 	import java.util.List;
 
 import jakarta.persistence.CascadeType;
