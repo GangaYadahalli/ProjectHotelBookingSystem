@@ -1,3 +1,4 @@
+
 package com.hexaware.hotelbookingsystem.entities;
 
 import java.time.LocalDate;
@@ -47,16 +48,18 @@ public class Payments {
     private LocalDate createdAt;
 
 	    @ManyToOne
-	    @JoinColumn(name = "user_id")
+	    @JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = false)
 	    private Users user; // Many-to-One relationship with Users
 
 	    @ManyToOne
-	    @JoinColumn(name = "booking_id")
+	    @JoinColumn(name = "booking_id", referencedColumnName = "bookingId",nullable = false)
 	    private Bookings booking; // Many-to-One relationship with Bookings
 	    
+	    
+
 	    @ManyToOne
-	    @JoinColumn(name = "hotelId")
-	    private Hotels hotel; 
+	    @JoinColumn(name = "hotel_id", referencedColumnName = "hotelId", nullable = false) // Ensure correct column mapping
+	    private Hotels hotel;
 
 	    public enum PaymentMethod { 
 

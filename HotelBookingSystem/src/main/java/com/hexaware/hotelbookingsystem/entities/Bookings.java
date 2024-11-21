@@ -1,3 +1,4 @@
+
 package com.hexaware.hotelbookingsystem.entities;
 import java.time.LocalDate;
 import java.util.List;
@@ -65,7 +66,7 @@ public class Bookings {
 	    private Hotels hotel; // Many-to-One relationship with Hotels
 
 	    @ManyToOne
-	    @JoinColumn(name = "room_id", nullable = false)
+	    @JoinColumn(name = "room_id",referencedColumnName = "roomId", nullable = false)
 	    private Rooms room; // Many-to-One relationship with Rooms
 	    
 	    // Enum for bookingStatus 
@@ -79,7 +80,7 @@ public class Bookings {
 	    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	    private List<Payments> payments; // One-to-Many relationship with Payments
 
-	   
+	    
 
 	    // Parameterized Constructor
 	    public Bookings(Integer bookingId, LocalDate checkInDate, LocalDate checkOutDate, Integer numberOfGuests,
@@ -235,4 +236,3 @@ public class Bookings {
 	    
 
 }
-

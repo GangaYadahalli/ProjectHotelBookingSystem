@@ -1,7 +1,7 @@
 package com.hexaware.hotelbookingsystem.service;
 
 import java.time.LocalDate;
-import com.hexaware.hotelbookingsystem.exception.BookingNotFoundException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hexaware.hotelbookingsystem.entities.Bookings;
 import com.hexaware.hotelbookingsystem.entities.Bookings.BookingStatus;
+import com.hexaware.hotelbookingsystem.exception.BookingNotFoundException;
 import com.hexaware.hotelbookingsystem.repository.BookingsRepository;
 
 @Service
@@ -26,20 +27,22 @@ public class BookingsServiceImp implements IBookingsService {
 
 	@Override
 	public Bookings getBookingById(Integer bookingId) {
+
 		
 		return repo.findById(bookingId).orElseThrow(() -> new BookingNotFoundException("Booking not found with ID: " + bookingId));
+
 	}
 
 	// 3. Get bookings by user ID
     @Override
     public List<Bookings> getBookingsByUserId(Integer userId) {
-        return repo.findByUserId(userId);
+        return repo.findByUser_UserId(userId);
     }
 
     // 4. Get bookings by hotel ID
     @Override
     public List<Bookings> getBookingsByHotelId(Integer hotelId) {
-        return repo.findByHotelId(hotelId);
+        return repo.findByHotel_HotelId(hotelId);
     }
 
     // 5. Update booking details
@@ -54,22 +57,23 @@ public class BookingsServiceImp implements IBookingsService {
     // 6. Cancel a booking by ID
     @Override
     public void cancelBookingById(Integer bookingId) {
-        Bookings booking = repo.findById(bookingId)
-                .orElseThrow(() -> new BookingNotFoundException("Booking not found with ID: " + bookingId));
-        booking.setBookingStatus(BookingStatus.CANCELLED);
-        repo.save(booking);
+        Optional<Bookings> optionalBooking = repo.findById(bookingId);
+        optionalBooking.ifPresent(booking -> {
+            booking.setBookingStatus(BookingStatus.CANCELLED);
+            repo.save(booking);
+        });
     }
 
     // 7. Get bookings by status
     @Override
     public List<Bookings> getBookingsByStatus(BookingStatus status) {
-        return repo.findByStatus(status);
+        return repo.findByBookingStatus(status);
     }
 
     // 8. Get bookings by room ID
     @Override
     public List<Bookings> getBookingsByRoomId(Integer roomId) {
-        return repo.findByRoomId(roomId);
+        return repo.findByRoom_RoomId(roomId);
     }
 
     // 9. Get bookings by date range

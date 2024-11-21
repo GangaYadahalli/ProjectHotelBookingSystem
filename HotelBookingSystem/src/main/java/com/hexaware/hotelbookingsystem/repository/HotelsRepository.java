@@ -12,9 +12,9 @@ import com.hexaware.hotelbookingsystem.entities.Hotels;
 public interface HotelsRepository extends JpaRepository<Hotels ,Integer>{
 	
 
-	List<Hotels> filterHotelsByLocation(String city);
+	public List<Hotels> findByCity(String city);
 	
-	List<Hotels> filterHotelsByRating(Double rating);
+	public List<Hotels> findByRating(Double rating);
 	
 	
 

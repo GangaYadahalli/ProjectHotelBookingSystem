@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hexaware.hotelbookingsystem.entities.Reviews;
 import com.hexaware.hotelbookingsystem.repository.ReviewsRepository;
-import com.hexaware.hotelbookingsystem.exception.ReviewNotFoundException;
+
 @Service
 public class ReviewsServiceImp implements IReviewsService {
 
@@ -23,19 +23,19 @@ public class ReviewsServiceImp implements IReviewsService {
 	    // 2. Get review by ID
 	    @Override
 	    public Reviews getReviewById(Integer reviewId) {
-	        return repo.findById(reviewId).orElseThrow(() -> new ReviewNotFoundException("Review not found with ID: " + reviewId)); 
+	        return repo.findById(reviewId).orElse(null); // Retrieve review or return null
 	    }
 
 	    // 3. Get all reviews for a specific hotel
 	    @Override
 	    public List<Reviews> getReviewsByHotelId(Integer hotelId) {
-	        return repo.findByHotelId(hotelId);
+	        return repo.findByHotel_HotelId(hotelId);
 	    }
 
 	    // 4. Get all reviews made by a specific user
 	    @Override
 	    public List<Reviews> getReviewsByUserId(Integer userId) {
-	        return repo.findByUserId(userId);
+	        return repo.findByUser_UserId(userId);
 	    }
 
 	    // 5. Update an existing review
@@ -50,10 +50,9 @@ public class ReviewsServiceImp implements IReviewsService {
 	    // 6. Delete a review by ID
 	    @Override
 	    public void deleteReviewById(Integer reviewId) {
-	        Reviews review = repo.findById(reviewId)
-	                .orElseThrow(() -> new ReviewNotFoundException("Review not found with ID: " + reviewId));
-	        repo.delete(review);
+	        repo.deleteById(reviewId); // Delete review by ID
 	    }
+
 	    // 7. Get the average rating for a specific hotel
 	    @Override
 	    public Double getAverageRatingByHotelId(Integer hotelId) {

@@ -6,8 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-	import jakarta.persistence.JoinColumn;
-	import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -38,11 +38,11 @@ import jakarta.validation.constraints.NotNull;
 	    private LocalDateTime updatedAt; // Optional field, no validation
 
 	    @ManyToOne
-	    @JoinColumn(name = "user_id", nullable = false)
+	    @JoinColumn(name = "user_id",referencedColumnName = "userId", nullable = false)
 	    private Users user; // Many-to-One relationship with Users
 
 	    @ManyToOne
-	    @JoinColumn(name = "hotel_id", nullable = false)
+	    @JoinColumn(name = "hotel_id",referencedColumnName = "hotelId", nullable = false)
 	    private Hotels hotel; // Many-to-One relationship with Hotels
 
 		public Reviews() {

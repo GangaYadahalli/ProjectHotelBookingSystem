@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.hotelbookingsystem.dto.HotelsDto;
 import com.hexaware.hotelbookingsystem.entities.Hotels;
 import com.hexaware.hotelbookingsystem.exception.HotelNotFoundException;
 import com.hexaware.hotelbookingsystem.service.IHotelsService;
@@ -23,14 +24,14 @@ public class HotelsController {
 	IHotelsService service;
 	
 	@PostMapping("/insert")
-	  public  Hotels  insert(@RequestBody Hotels hotel) {
+	  public  Hotels  insert(@RequestBody HotelsDto hotelDto) {
 		
-		return  service.addHotels(hotel);
+		return  service.addHotels(hotelDto);
 	  }
 	@PutMapping("/update")
-	  public Hotels   update(@RequestBody Hotels hotel) {
+	  public Hotels   update(@RequestBody HotelsDto hotelDto) {
 		
-		  return service.updateHotels(hotel);
+		  return service.updateHotels(hotelDto);
 		  
 	  }
 	@DeleteMapping("/delete/{hotelId}")
@@ -57,16 +58,16 @@ public class HotelsController {
 		  return service.getAllHotels();
 		  
 	  }
-	  @GetMapping("/filterHotelsByLocation/{city}")
-	  public List<Hotels> filterHotelsByLocation(@PathVariable String city){
+	  @GetMapping("/getByCity/{city}")
+	  public List<Hotels> getByCity(@PathVariable String city){
 		  
-		  return service.filterHotelsByLocation(city);
+		  return service.getByCity(city);
 		  
 	  }
-	  @GetMapping("/filterHotelsByRating/{rating}")
-	  public List<Hotels> filterHotelsByRating (@PathVariable Double rating){
+	  @GetMapping("/getByRating/{rating}")
+	  public List<Hotels> getByRating(@PathVariable Double rating){
 		  
-		  return service.filterHotelsByRating(rating);
+		  return service.getByRating(rating);
 		  
 	  }
 	  

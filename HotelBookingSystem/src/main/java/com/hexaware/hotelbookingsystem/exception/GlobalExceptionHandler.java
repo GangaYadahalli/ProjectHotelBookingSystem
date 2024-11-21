@@ -26,35 +26,34 @@ public class GlobalExceptionHandler {
 	    return new ResponseEntity<>("Invalid input format please enter valid roomId  ",HttpStatus.BAD_REQUEST);
 	}
 	
-	// Handle PaymentNotFoundException
-    @ExceptionHandler(PaymentNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handlePaymentNotFoundException(PaymentNotFoundException ex) {
-        Map<String, Object> errorDetails = new HashMap<>();
-        errorDetails.put("timestamp", LocalDateTime.now());
-        errorDetails.put("message", ex.getMessage());
-        errorDetails.put("status", HttpStatus.NOT_FOUND.value());
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-    }
+	 @ExceptionHandler(PaymentNotFoundException.class)
+	    public ResponseEntity<Map<String, Object>> handlePaymentNotFoundException(PaymentNotFoundException ex) {
+	        Map<String, Object> errorDetails = new HashMap<>();
+	        errorDetails.put("timestamp", LocalDateTime.now());
+	        errorDetails.put("message", ex.getMessage());
+	        errorDetails.put("status", HttpStatus.NOT_FOUND.value());
+	        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+	    }
 
-    // Handle BookingNotFoundException
-    @ExceptionHandler(BookingNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleBookingNotFoundException(BookingNotFoundException ex) {
-        Map<String, Object> errorDetails = new HashMap<>();
-        errorDetails.put("timestamp", LocalDateTime.now());
-        errorDetails.put("message", ex.getMessage());
-        errorDetails.put("status", HttpStatus.NOT_FOUND.value());
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-    }
+	    // Handle BookingNotFoundException
+	    @ExceptionHandler(BookingNotFoundException.class)
+	    public ResponseEntity<Map<String, Object>> handleBookingNotFoundException(BookingNotFoundException ex) {
+	        Map<String, Object> errorDetails = new HashMap<>();
+	        errorDetails.put("timestamp", LocalDateTime.now());
+	        errorDetails.put("message", ex.getMessage());
+	        errorDetails.put("status", HttpStatus.NOT_FOUND.value());
+	        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+	    }
 
-    // Handle ReviewNotFoundException
-    @ExceptionHandler(ReviewNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleReviewNotFoundException(ReviewNotFoundException ex) {
-        Map<String, Object> errorDetails = new HashMap<>();
-        errorDetails.put("timestamp", LocalDateTime.now());
-        errorDetails.put("message", ex.getMessage());
-        errorDetails.put("status", HttpStatus.NOT_FOUND.value());
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-    }
+	    // Handle ReviewNotFoundException
+	    @ExceptionHandler(ReviewNotFoundException.class)
+	    public ResponseEntity<Map<String, Object>> handleReviewNotFoundException(ReviewNotFoundException ex) {
+	        Map<String, Object> errorDetails = new HashMap<>();
+	        errorDetails.put("timestamp", LocalDateTime.now());
+	        errorDetails.put("message", ex.getMessage());
+	        errorDetails.put("status", HttpStatus.NOT_FOUND.value());
+	        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+	    }
 
 
 }

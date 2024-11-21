@@ -28,4 +28,3 @@ public interface IReviewsService {
     Double getAverageRatingByHotelId(Integer hotelId);
 
 }
-

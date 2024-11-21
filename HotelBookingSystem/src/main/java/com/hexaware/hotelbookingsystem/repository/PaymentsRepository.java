@@ -10,9 +10,9 @@ import org.springframework.data.repository.query.Param;
 import com.hexaware.hotelbookingsystem.entities.Payments;
 
 public interface PaymentsRepository extends JpaRepository<Payments, Integer> {
-	List<Payments> findByUserId(Integer userId);
+	List<Payments> findByUser_UserId(Integer userId);
 
-	List<Payments> findByBookingId(Integer bookingId);
+	List<Payments> findByBooking_BookingId(Integer bookingId);
 	
 	// Update payment status (custom query if required)
     @Query("SELECT p FROM Payments p WHERE p.paymentId = :paymentId")

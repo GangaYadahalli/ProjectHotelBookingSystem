@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hexaware.hotelbookingsystem.entities.Payments;
-import com.hexaware.hotelbookingsystem.exception.PaymentNotFoundException;
 import com.hexaware.hotelbookingsystem.repository.PaymentsRepository;
 
+@Service
 public class PaymentsServiceImp implements IPaymentsService {
 
 	@Autowired
@@ -23,23 +24,23 @@ public class PaymentsServiceImp implements IPaymentsService {
     // 2. Get payment by ID
     @Override
     public Payments getPaymentById(Integer paymentId) {
-    	return repo.findById(paymentId).orElseThrow(() -> new PaymentNotFoundException("Payment not found with ID: " + paymentId));
+        return repo.findById(paymentId).orElse(null); // Retrieve payment or return null
     }
 
     // 3. Get all payments by user ID
     @Override
     public List<Payments> getPaymentsByUserId(Integer userId) {
-        return repo.findByUserId(userId);
+        return repo.findByUser_UserId(userId);
     }
 
     // 4. Get all payments by booking ID
     @Override
     public List<Payments> getPaymentsByBookingId(Integer bookingId) {
-        return repo.findByBookingId(bookingId);
+        return repo.findByBooking_BookingId(bookingId);
     }
 
     // 5. Update payment status
-   /* @Override
+    @Override
     public Payments updatePaymentStatus(Payments payment) {
         Optional<Payments> existingPayment = repo.findById(payment.getPaymentId());
         if (existingPayment.isPresent()) {
@@ -48,16 +49,6 @@ public class PaymentsServiceImp implements IPaymentsService {
             return repo.save(updatedPayment);
         }
         return null; // Return null if payment not found
-    }
-*/
-    
-    @Override
-    public Payments updatePaymentStatus(Payments payment) {
-        Payments existingPayment = repo.findById(payment.getPaymentId())
-                .orElseThrow(() -> new PaymentNotFoundException("Payment not found with ID: " + payment.getPaymentId()));
-        
-        existingPayment.setPaymentStatus(payment.getPaymentStatus());
-        return repo.save(existingPayment);
     }
 
 }
