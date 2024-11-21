@@ -1,4 +1,8 @@
-package com.hexaware.hotelbookingsystem.service;
+/*
+ *Interface  for Users
+ *Author : Ganga
+ *Date: 2024-11-15
+ * */package com.hexaware.hotelbookingsystem.service;
 
 import java.util.List;
 

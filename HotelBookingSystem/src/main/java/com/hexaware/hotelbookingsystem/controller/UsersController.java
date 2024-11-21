@@ -1,7 +1,14 @@
+/*
+ *Controller  for Users
+ *Author : Ganga
+ *Date: 2024-11-16
+ * */
 package com.hexaware.hotelbookingsystem.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,20 +25,26 @@ import com.hexaware.hotelbookingsystem.exception.UserNotFoundException;
 import com.hexaware.hotelbookingsystem.service.IUsersService;
 
 
-
 @RestController
 @RequestMapping("/api/users")
 public class UsersController {
 	@Autowired
 	IUsersService service;
 	
+	Logger logger=LoggerFactory.getLogger(UsersController.class);
+	
 	@PostMapping("/insert")
 	  public  Users  insert(@RequestBody UsersDto userDto) {
 		
+		logger.info("Users object added successfully");
 		return  service.addUsers(userDto);
+		
+
 	  }
 	@PutMapping("/update")
 	  public  Users    update(@RequestBody UsersDto userDto) {
+		
+		logger.info("Users object updated successfully");
 		
 		  return service.updateUsers(userDto);
 		  
@@ -66,13 +79,13 @@ public class UsersController {
 		return "Record deleted for name " +name;
 	  }
 	  
-	  @PutMapping("/updatePhoneNumber/{phno}{id}")
+	  @PutMapping("/updatePhoneNumber/{phno}/{id}")
 	  public  int   updatePhoneNumber(@PathVariable Long phno, @PathVariable Integer id) {
 		
 		  return service.updatePhoneNumber(phno, id);
 		  
 	  }
-	  @PutMapping("/updatePassword/{password}{userId}")
+	  @PutMapping("/updatePassword/{pword}/{id}")
 	  public  int    updatePassword(@PathVariable String pword, @PathVariable Integer id) {
 		
 		  return service.updatePassword(pword, id);

@@ -1,3 +1,8 @@
+/*
+ *Entity class for Reviews
+ *Author : Prerna
+ *Date: 2024-11-07
+ * */
 package com.hexaware.hotelbookingsystem.entities;
 	import java.time.LocalDateTime;
 

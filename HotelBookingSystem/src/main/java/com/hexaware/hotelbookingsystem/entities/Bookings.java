@@ -1,4 +1,8 @@
-
+/*
+ *Entity class for Bookings
+ *Author : Prerna
+ *Date: 2024-11-07
+ * */
 package com.hexaware.hotelbookingsystem.entities;
 import java.time.LocalDate;
 import java.util.List;

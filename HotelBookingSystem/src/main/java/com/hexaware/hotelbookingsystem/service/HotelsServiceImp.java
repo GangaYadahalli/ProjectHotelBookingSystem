@@ -2,11 +2,14 @@ package com.hexaware.hotelbookingsystem.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.hotelbookingsystem.dto.HotelsDto;
 import com.hexaware.hotelbookingsystem.entities.Hotels;
+import com.hexaware.hotelbookingsystem.entities.Users;
 import com.hexaware.hotelbookingsystem.repository.HotelsRepository;
 
 import jakarta.transaction.Transactional;
@@ -17,6 +20,11 @@ public class HotelsServiceImp implements IHotelsService {
 	
 	@Autowired 
 	HotelsRepository repo;
+	
+	@Autowired
+	IUsersService service;
+	
+	Logger logger=LoggerFactory.getLogger(HotelsServiceImp.class);
 
 	@Override
 	public Hotels addHotels(HotelsDto hotelDto) {
@@ -29,9 +37,11 @@ public class HotelsServiceImp implements IHotelsService {
 		hotel.setDescription(hotelDto.getDescription());
 		hotel.setContactNumber(hotelDto.getContactNumber());
 		hotel.setRating(hotelDto.getRating());
-		//hotel.setUser(hotelDto.getUserId());
-		
-		
+		 Users user = service.getUsersById(hotelDto.getUserId());  
+		    
+		   
+		    hotel.setUser(user);
+		    logger.info("Hotels add service is called");
 		return repo.save(hotel);
 	}
 
@@ -48,7 +58,7 @@ public class HotelsServiceImp implements IHotelsService {
 		hotel.setContactNumber(hotelDto.getContactNumber());
 		hotel.setRating(hotelDto.getRating());
 		//hotel.setUser(hotelDto.getUserId());
-		
+		logger.info("Hotels update service is called");
 		return repo.save(hotel);
 	}
 

@@ -1,3 +1,8 @@
+/*
+ *Interface  for Hotels
+ *Author : Ganga
+ *Date: 2024-11-15
+ * */
 package com.hexaware.hotelbookingsystem.service;
 
 import java.util.List;

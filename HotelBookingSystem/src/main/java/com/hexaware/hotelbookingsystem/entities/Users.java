@@ -1,5 +1,10 @@
-package com.hexaware.hotelbookingsystem.entities;
 
+/*
+ *Entity class for users
+ *Author :Ganga
+ *Date: 2024-11-07
+ * */
+package com.hexaware.hotelbookingsystem.entities;
 import java.time.LocalDate;
 import java.util.List;
 
