@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.hotelbookingsystem.dto.UsersDto;
@@ -23,6 +24,9 @@ public class UsersServiceImp implements IUsersService {
 	
 	Logger logger=LoggerFactory.getLogger(UsersServiceImp.class);
 	
+	  @Autowired
+	  private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public Users addUsers(UsersDto userDto) {
 		
@@ -30,14 +34,14 @@ public class UsersServiceImp implements IUsersService {
 		
 		user.setUserId(userDto.getUserId());
 		user.setEmail(userDto.getEmail());
-		user.setPassword(userDto.getPassword());
+		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setName(userDto.getName());
 		user.setPhoneNumber(userDto.getPhoneNumber());
 		user.setDateCreated(userDto.getDateCreated());
 		user.setUserrole(Users.UserRole.valueOf(userDto.getUserrole().name()));
 		user.setUpdatedAt(userDto.getUpdatedAt());
 		
-	
+       //user.setPassword(passwordEncoder.encode(user.getPassword()));
 		logger.info("Users add service is called");
 		return repo.save(user);
 	}
@@ -106,6 +110,15 @@ public class UsersServiceImp implements IUsersService {
 		return repo.updatePassword(password, userId);
 	}
 
+
+	@Override
+	public Users getByName(String name) {
+		
+		return repo.findByName(name).orElse(null);
+	}
+
+
+	
 
 
 

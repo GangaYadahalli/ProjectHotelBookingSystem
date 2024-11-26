@@ -28,7 +28,9 @@ public interface IUsersService {
 	public int updatePhoneNumber(Long phoneNumber ,Integer userId);
 	
 	public int updatePassword(String password,Integer userId);
-	
 
+	//public String addUser(Users user);
+	
+	public Users getByName(String name);
 	
 }

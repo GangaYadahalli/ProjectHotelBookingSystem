@@ -61,11 +61,6 @@ class RoomsServiceImpTest {
 		
 	}
 
-	@Test
-	@Disabled
-	void testDeleteRoomsById() {
-		
-	}
 
 	@Test
 	@Disabled
@@ -78,16 +73,6 @@ class RoomsServiceImpTest {
 		
 	}
 
-	@Test
-	@Disabled
-	void testUpdatepricePerNight() {
-		
-	}
-
-	@Test
-	@Disabled
-	void testUpdateCapacity() {
-		
-	}
+	
 
 }

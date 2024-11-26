@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,12 +12,15 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hexaware.hotelbookingsystem.dto.UsersDto;
 import com.hexaware.hotelbookingsystem.dto.UsersDto.UserRole;
 import com.hexaware.hotelbookingsystem.entities.Users;
+import com.hexaware.hotelbookingsystem.repository.UsersRepository;
 
 
 
@@ -25,10 +29,34 @@ class UsersServiceImpTest {
 	
 	@Autowired
 	IUsersService service;
+	
+	 @Mock
+	 private UsersRepository usersRepository; // Mocked Repository
+
+	 @InjectMocks
+	 private UsersServiceImp usersService;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
+	
+	@Test
+	@Disabled
+	void testAddUsersWithMocks() {
+		UsersDto user = new UsersDto(7, "Kiran@gmail.com", "kiran@2000", "Kiran",  8987651190L, LocalDate.parse("2024-01-12"),UserRole.GUEST, LocalDate.parse("2024-01-12"));
+	    
+
+	    
+	    Users mockUser = new Users(7, "Kiran@gmail.com", "kiran@2000", "Kiran",  8987651190L, LocalDate.parse("2024-01-12"),Users.UserRole.GUEST, LocalDate.parse("2024-01-12"));
+
+	    when(usersRepository.save(mockUser)).thenReturn(mockUser);
+	    
+	    Users savedUser = service.addUsers(user);
+
+	    assertNotNull(savedUser, "Saved user should not be null");
+	   
+	}
+
 
 	@Test
 	@Disabled
@@ -65,12 +93,13 @@ class UsersServiceImpTest {
 
 	@Test
 	@Disabled
-	void testDeleteUsersById() {
-//	
-//		int user=service.deleteUsersById(2);
-//
-//		assertNotNull(user);
+	void testDeleteByName() {
+		String userName = "Kiran";
+
+		int  user=service.deleteByName(userName);
 		
+
+		assertNotNull(user);
 	}
 	
 	@Test

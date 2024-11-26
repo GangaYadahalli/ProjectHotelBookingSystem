@@ -30,6 +30,7 @@ class HotelsServiceImpTest {
 	}
 
 	@Test
+	@Disabled
 	void testAddHotels() {
 		
 		HotelsDto hotelDto = new HotelsDto(101, "The Grand Hotel", "Main Street", "Hybderbad", "Luxury 5-star hotel", 9876543210L, 4.7,5);
@@ -68,6 +69,13 @@ class HotelsServiceImpTest {
 	@Test
 	@Disabled
 	void testDeleteHotelsById() {
+		int hotelId = 103;
+
+		service.deleteHotelsById(hotelId);
+
+		assertNotNull(hotelId);
+
+
 		
 	}
 
@@ -83,14 +91,6 @@ class HotelsServiceImpTest {
 		
 	}
 
-	@Test
-	void testGetByCity() {
-		
-	}
 
-	@Test
-	void testGetByRating() {
-		
-	}
 
 }

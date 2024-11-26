@@ -42,11 +42,7 @@ class UsersControllerTest {
 								assertEquals(6, u.getUserId());	
 	}
 
-	@Test
-	@Disabled
-	void testUpdate() {
-	
-	}
+
 
 	@Test
 	@Disabled
@@ -59,7 +55,7 @@ class UsersControllerTest {
 	@Test
 	@Disabled
 	void testGetById() {
-		int userId = 101;
+		int userId = 1;
 
 		ResponseEntity<Users> response = restTemplate.getForEntity("http://localhost:8080/api/users/getbyid/" + userId,
 				Users.class);
