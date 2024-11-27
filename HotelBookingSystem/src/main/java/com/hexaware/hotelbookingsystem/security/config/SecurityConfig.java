@@ -36,10 +36,12 @@ public class SecurityConfig {
 	       return new UserInfoUserDetailsService();
 	    }
 	   
+
 	   @Bean
 	   public SecurityFilterChain getSecurityFilterChain(HttpSecurity http) throws Exception {
 	       return http.csrf().disable()
 	               .authorizeHttpRequests()
+
 	               .requestMatchers("/api/users/insert", "/api/users/login/authenticate","/api/hotels/insert","/api/rooms/insert","/api/hotels/getbyid/**").permitAll() // Public endpoints
 	               .requestMatchers(HttpMethod.GET, "/api/users/getbyid/**","/api/users/updatePassword/*/*","/api/hotels/getByCity/**","/api/hotels/getByRating/**","/api/users/updatePhoneNumber/*/*","/api/rooms/getbyid/**").hasAuthority("GUEST") // Guest permissions
 	               .requestMatchers("/api/users/update", "/api/users/delete/**", "/api/users/getall","/api/users/getByName/**","/api/hotels/getall","/api/hotels/update","/api/hotels/delete/**","/api/rooms/update","/api/rooms/delete/**","/api/rooms/getall","/api/rooms/updatePricePerNight/*/*","/api/rooms/updateCapacity/*/*").hasAuthority("ADMIN")
