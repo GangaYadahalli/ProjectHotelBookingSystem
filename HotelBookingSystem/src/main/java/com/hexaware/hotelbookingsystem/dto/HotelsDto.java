@@ -1,3 +1,8 @@
+/*
+ *Dto class For Hotels
+ *Author : Ganga
+ *Date: 2024-11-20
+ * */
 package com.hexaware.hotelbookingsystem.dto;
 
 import com.hexaware.hotelbookingsystem.entities.Users;

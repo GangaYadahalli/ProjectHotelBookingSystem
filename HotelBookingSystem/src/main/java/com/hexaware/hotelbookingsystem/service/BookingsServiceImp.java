@@ -1,60 +1,123 @@
+/*
+ *service class implementation  for bookings
+ *Author : Prerna
+ *Date: 2024-11-22
+ * */
 package com.hexaware.hotelbookingsystem.service;
 
-import java.time.LocalDate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import jakarta.transaction.Transactional;
+import com.hexaware.hotelbookingsystem.dto.BookingsDto;
+import com.hexaware.hotelbookingsystem.entities.Bookings;
+import com.hexaware.hotelbookingsystem.entities.Users;
+import com.hexaware.hotelbookingsystem.entities.Hotels;
+import com.hexaware.hotelbookingsystem.entities.Rooms;
+import com.hexaware.hotelbookingsystem.entities.Bookings.BookingStatus;
+import com.hexaware.hotelbookingsystem.repository.BookingsRepository;
+import com.hexaware.hotelbookingsystem.repository.UsersRepository;
+import com.hexaware.hotelbookingsystem.repository.HotelsRepository;
+import com.hexaware.hotelbookingsystem.repository.RoomsRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.hexaware.hotelbookingsystem.entities.Bookings;
-import com.hexaware.hotelbookingsystem.entities.Bookings.BookingStatus;
-import com.hexaware.hotelbookingsystem.exception.BookingNotFoundException;
-import com.hexaware.hotelbookingsystem.repository.BookingsRepository;
-
+@Transactional
 @Service
 public class BookingsServiceImp implements IBookingsService {
 
-	  @Autowired
-	    private BookingsRepository repo;
-	  
-	@Override
-	public Bookings createBooking(Bookings booking) {
-		
-		return repo.save(booking);
-	}
+    @Autowired
+    private BookingsRepository repo;
 
-	@Override
-	public Bookings getBookingById(Integer bookingId) {
+    @Autowired
+    private UsersRepository userRepository;
 
-		
-		return repo.findById(bookingId).orElseThrow(() -> new BookingNotFoundException("Booking not found with ID: " + bookingId));
+    @Autowired
+    private HotelsRepository hotelRepository;
 
-	}
+    @Autowired
+    private RoomsRepository roomRepository;
 
-	// 3. Get bookings by user ID
     @Override
-    public List<Bookings> getBookingsByUserId(Integer userId) {
-        return repo.findByUser_UserId(userId);
+    public Bookings createBooking(BookingsDto bookingDto) {
+        // Create a new Bookings entity
+        Bookings booking = new Bookings();
+
+        // Set properties from BookingsDto
+        booking.setCheckInDate(bookingDto.getCheckInDate());
+        booking.setCheckOutDate(bookingDto.getCheckOutDate());
+        booking.setTotalAmount(bookingDto.getTotalAmount());
+     /*   
+        // Handle null check for booking status
+        if (bookingDto.getBookingStatus() != null) {
+            booking.setBookingStatus(BookingStatus.valueOf(bookingDto.getBookingStatus().toUpperCase()));
+        } else {
+            // Set default status to PENDING if not provided
+            booking.setBookingStatus(BookingStatus.PENDING);
+        }
+        */
+        
+        booking.setBookingStatus(Bookings.BookingStatus.valueOf(bookingDto.getBookingStatus().name()));
+
+        booking.setBookingDate(bookingDto.getBookingDate());
+        booking.setNumberOfGuests(bookingDto.getNumberOfGuests());
+        booking.setSpecialRequests(bookingDto.getSpecialRequests());
+
+     
+        Users user = new Users();
+        user.setUserId(bookingDto.getUserId());  // Set the user ID
+        booking.setUser(user);
+        
+        Hotels hotel = new Hotels();
+        hotel.setHotelId(bookingDto.getHotelId());  // Set the hotel ID
+        booking.setHotel(hotel);
+        
+        Rooms room = new Rooms();
+        room.setRoomId(bookingDto.getRoomId());  // Set the room ID
+        booking.setRoom(room);
+
+        // Save the booking and return the saved entity
+        return repo.save(booking);
     }
 
-    // 4. Get bookings by hotel ID
+   
+    
     @Override
-    public List<Bookings> getBookingsByHotelId(Integer hotelId) {
-        return repo.findByHotel_HotelId(hotelId);
+    public Bookings getBookingById(Integer bookingId) {
+        if (bookingId == null) {
+            throw new IllegalArgumentException("Booking ID cannot be null");
+        }
+        return repo.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("No booking found with ID: " + bookingId));
     }
 
-    // 5. Update booking details
+
+   /*
+
     @Override
-    public Bookings updateBooking(Bookings booking) {
-        if (repo.existsById(booking.getBookingId())) {
+    public Bookings updateBooking(BookingsDto bookingDto) {
+        Optional<Bookings> optionalBooking = repo.findById(bookingDto.getBookingId());
+        if (optionalBooking.isPresent()) {
+            // Fetch the existing booking entity
+            Bookings booking = optionalBooking.get();
+
+            // Update the booking details with the new data from the DTO
+            booking.setCheckInDate(bookingDto.getCheckInDate());
+            booking.setCheckOutDate(bookingDto.getCheckOutDate());
+            booking.setTotalAmount(bookingDto.getTotalAmount());
+            booking.setBookingStatus(BookingStatus.valueOf(bookingDto.getBookingStatus().toUpperCase()));
+            booking.setBookingDate(bookingDto.getBookingDate());
+            booking.setNumberOfGuests(bookingDto.getNumberOfGuests());
+            booking.setSpecialRequests(bookingDto.getSpecialRequests());
+
+           
+            // Save and return the updated booking
             return repo.save(booking);
         }
-        return null;
+        throw new RuntimeException("Booking not found with ID: " + bookingDto.getBookingId());
     }
+    */
 
-    // 6. Cancel a booking by ID
     @Override
     public void cancelBookingById(Integer bookingId) {
         Optional<Bookings> optionalBooking = repo.findById(bookingId);
@@ -64,22 +127,10 @@ public class BookingsServiceImp implements IBookingsService {
         });
     }
 
-    // 7. Get bookings by status
     @Override
     public List<Bookings> getBookingsByStatus(BookingStatus status) {
         return repo.findByBookingStatus(status);
     }
 
-    // 8. Get bookings by room ID
-    @Override
-    public List<Bookings> getBookingsByRoomId(Integer roomId) {
-        return repo.findByRoom_RoomId(roomId);
-    }
-
-    // 9. Get bookings by date range
-    @Override
-    public List<Bookings> getBookingsByDateRange(LocalDate startDate, LocalDate endDate) {
-        return repo.findByBookingDateBetween(startDate, endDate);
-    }
-
+   
 }

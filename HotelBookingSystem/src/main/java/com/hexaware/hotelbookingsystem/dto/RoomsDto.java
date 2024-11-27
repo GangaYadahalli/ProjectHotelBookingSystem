@@ -1,3 +1,8 @@
+/*
+ *Dto class For Rooms
+ *Author : Ganga
+ *Date: 2024-11-20
+ * */
 package com.hexaware.hotelbookingsystem.dto;
 
 

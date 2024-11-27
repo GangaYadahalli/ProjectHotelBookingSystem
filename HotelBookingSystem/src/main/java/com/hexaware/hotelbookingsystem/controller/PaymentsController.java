@@ -12,67 +12,52 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.hexaware.hotelbookingsystem.dto.PaymentsDto;
 import com.hexaware.hotelbookingsystem.entities.Payments;
+import com.hexaware.hotelbookingsystem.entities.Reviews;
+import com.hexaware.hotelbookingsystem.exception.PaymentNotFoundException;
+import com.hexaware.hotelbookingsystem.exception.ReviewNotFoundException;
 import com.hexaware.hotelbookingsystem.service.IPaymentsService;
 
-
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("/api/payments")
 public class PaymentsController {
 
     @Autowired
-    private IPaymentsService paymentsService;
+    IPaymentsService service;
 
-    // 1. Process a new payment
-    @PostMapping
-    public ResponseEntity<Payments> processPayment(@RequestBody Payments payment) {
-        Payments processedPayment = paymentsService.processPayment(payment);
-        return new ResponseEntity<>(processedPayment, HttpStatus.CREATED);
+    @PostMapping("/process")
+    public Payments processPayment(@RequestBody PaymentsDto paymentdto) {
+		return service.processPayment(paymentdto);
     }
 
-    // 2. Get payment by ID
-    @GetMapping("/{paymentId}")
-    public ResponseEntity<Payments> getPaymentById(@PathVariable Integer paymentId) {
-        Payments payment = paymentsService.getPaymentById(paymentId);
-        if (payment != null) {
-            return new ResponseEntity<>(payment, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  
+
+    @GetMapping("/getbyid/{paymentId}")
+    public Payments getPaymentById(@PathVariable Integer paymentId) {
+        Payments payment = service.getPaymentById(paymentId);
+        if (payment == null) {
+            throw new PaymentNotFoundException("Payment not found for ID: " + paymentId);
         }
+        return payment;
+    }
+    
+/*
+    @GetMapping("/getbyuserid/{userId}")
+    public List<Payments> getPaymentsByUserId(@PathVariable Integer userId) {
+        return service.getPaymentsByUserId(userId);
     }
 
-    // 3. Get all payments by user ID
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Payments>> getPaymentsByUserId(@PathVariable Integer userId) {
-        List<Payments> payments = paymentsService.getPaymentsByUserId(userId);
-        if (payments != null && !payments.isEmpty()) {
-            return new ResponseEntity<>(payments, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/getbybookingid/{bookingId}")
+    public List<Payments> getPaymentsByBookingId(@PathVariable Integer bookingId) {
+        return service.getPaymentsByBookingId(bookingId);
     }
-
-    // 4. Get all payments for a specific booking
-    @GetMapping("/booking/{bookingId}")
-    public ResponseEntity<List<Payments>> getPaymentsByBookingId(@PathVariable Integer bookingId) {
-        List<Payments> payments = paymentsService.getPaymentsByBookingId(bookingId);
-        if (payments != null && !payments.isEmpty()) {
-            return new ResponseEntity<>(payments, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+ */
+/*
+    @PutMapping("/updateStatus/{paymentId}")
+    public Payments updatePaymentStatus(@PathVariable Integer paymentId, @RequestBody Payments updatedPayment) {
+        updatedPayment.setPaymentId(paymentId); // Ensure the ID remains unchanged
+        return service.updatePaymentStatus(updatedPayment);
     }
-
-    // 5. Update payment status
-    @PutMapping("/{paymentId}")
-    public ResponseEntity<Payments> updatePaymentStatus(@PathVariable Integer paymentId, @RequestBody Payments updatedPayment) {
-        Payments existingPayment = paymentsService.getPaymentById(paymentId);
-        if (existingPayment != null) {
-            updatedPayment.setPaymentId(paymentId); // Ensure the ID remains unchanged
-            Payments updated = paymentsService.updatePaymentStatus(updatedPayment);
-            return new ResponseEntity<>(updated, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+    */
 }
