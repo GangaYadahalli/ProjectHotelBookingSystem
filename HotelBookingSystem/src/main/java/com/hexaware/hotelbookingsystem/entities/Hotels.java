@@ -5,6 +5,9 @@
  * */package com.hexaware.hotelbookingsystem.entities;
 	import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,10 +50,12 @@ import jakarta.validation.constraints.Size;
 		 
 		 @OneToOne
 		 @JoinColumn(name = "user_id") 
+		 @JsonManagedReference
 		 private Users user;
 		 
 		
 		 @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL ,  fetch = FetchType.LAZY)
+		 @JsonManagedReference
 		 private List<Rooms> rooms; 
 
 		 @OneToMany(mappedBy = "hotel" , cascade = CascadeType.ALL ,  fetch = FetchType.LAZY)
@@ -198,15 +203,17 @@ import jakarta.validation.constraints.Size;
 		public void setPayments(List<Payments> payments) {
 			this.payments = payments;
 		}
-	
 
 
 		@Override
 		public String toString() {
 			return "Hotels [hotelId=" + hotelId + ", hotelName=" + hotelName + ", address=" + address + ", city=" + city
-					+ ", description=" + description + ", contactNumber=" + contactNumber + ", rating=" + rating
-					+ ", user=" + user + "]";
+					+ ", description=" + description + ", contactNumber=" + contactNumber + ", rating=" + rating + "]";
 		}
+	
+
+
+		
 		
 	
 

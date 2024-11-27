@@ -7,6 +7,8 @@
 package com.hexaware.hotelbookingsystem.entities;
 	import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -39,6 +41,7 @@ import jakarta.persistence.OneToMany;
 			
 		
 			@ManyToOne
+			@JsonBackReference 
 		    @JoinColumn(name = "hotel_id")
 		    private Hotels hotel; 
 

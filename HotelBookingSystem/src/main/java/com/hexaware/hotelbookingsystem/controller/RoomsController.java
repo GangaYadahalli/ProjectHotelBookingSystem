@@ -12,6 +12,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +43,7 @@ public class RoomsController {
 		return  service.addRooms(roomDto);
 	  }
 	@PutMapping("/update")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	  public Rooms   update(@RequestBody RoomsDto roomDto) {
 		
 		logger.info("Rooms object updated successfully");
@@ -49,6 +51,7 @@ public class RoomsController {
 		  
 	  }
 	@DeleteMapping("/delete/{roomId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	  public String   delete(@PathVariable  Integer roomId) {
 		  
 		service.deleteRoomsById(roomId);
@@ -56,6 +59,7 @@ public class RoomsController {
 	  }
 	  
 	  @GetMapping("/getbyid/{roomId}")
+	  @PreAuthorize("hasAuthority('GUEST')")
 	  public  Rooms  getById(@PathVariable Integer roomId) {
 		  Rooms room=null;
 		  room= service.getRoomById(roomId);
@@ -67,6 +71,7 @@ public class RoomsController {
 	  }
 	  
 	  @GetMapping("/getall")
+	  @PreAuthorize("hasAuthority('ADMIN')")
 	  public List<Rooms>  getAll(){
 		  
 		  return service.getAllRooms();
@@ -74,12 +79,14 @@ public class RoomsController {
 	  }
 	  
 		@PutMapping("/updatePricePerNight/{price}/{id}")
+		@PreAuthorize("hasAuthority('ADMIN')")
 		  public int  updatePricePerNight(@PathVariable Integer price ,@PathVariable Integer id) {
 			
 			  return service.updatepricePerNight(price, id);
 			  
 		  }
 		@PutMapping("/updateCapacity/{capacity}/{id}")
+		@PreAuthorize("hasAuthority('ADMIN')")
 		  public int  updateCapacity(@PathVariable Integer capacity ,@PathVariable Integer id) {
 			
 			  return service.updateCapacity(capacity, id);

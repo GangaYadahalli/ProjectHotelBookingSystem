@@ -8,6 +8,9 @@ package com.hexaware.hotelbookingsystem.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,7 +21,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 	@Entity
@@ -49,6 +51,7 @@ import jakarta.validation.constraints.Pattern;
 		private LocalDate updatedAt;
 		
 		@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+		@JsonBackReference
 	    private Hotels hotel; 
 
 	    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
@@ -59,10 +62,9 @@ import jakarta.validation.constraints.Pattern;
 	    
 	    @OneToMany(mappedBy="user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
 	    private List<Payments> payments;
-	    
-		public enum UserRole {
-			GUEST, HOTELOWNER , ADMIN
-		}
+	    public enum UserRole {
+	        GUEST, HOTELOWNER, ADMIN;
+	    }
 
 		public Users() {
 			super();
