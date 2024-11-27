@@ -22,54 +22,57 @@ import com.hexaware.hotelbookingsystem.service.IHotelsService;
 public class HotelsController {
 	@Autowired
 	IHotelsService service;
-	
+
 	@PostMapping("/insert")
-	  public  Hotels  insert(@RequestBody HotelsDto hotelDto) {
-		
-		return  service.addHotels(hotelDto);
-	  }
+	public Hotels insert(@RequestBody HotelsDto hotelDto) {
+
+		return service.addHotels(hotelDto);
+	}
+
 	@PutMapping("/update")
-	  public Hotels   update(@RequestBody HotelsDto hotelDto) {
-		
-		  return service.updateHotels(hotelDto);
-		  
-	  }
+	public Hotels update(@RequestBody HotelsDto hotelDto) {
+
+		return service.updateHotels(hotelDto);
+
+	}
+
 	@DeleteMapping("/delete/{hotelId}")
-	  public String   delete(@PathVariable  Integer hotelId) {
-		  
+	public String delete(@PathVariable Integer hotelId) {
+
 		service.deleteHotelsById(hotelId);
-		return "Record deleted for hotelId" +hotelId;
-	  }
-	  
-	  @GetMapping("/getbyid/{hotelId}")
-	  public  Hotels  getById(@PathVariable Integer hotelId) {
-		  Hotels hotel=null;
-		  hotel= service.getHotelById(hotelId);
-			    if (hotel == null) {
-			        throw new HotelNotFoundException();
-			    }
-			    return hotel;
-		  
-	  }
-	  
-	  @GetMapping("/getall")
-	  public List<Hotels>  getAll(){
-		  
-		  return service.getAllHotels();
-		  
-	  }
-	  @GetMapping("/getByCity/{city}")
-	  public List<Hotels> getByCity(@PathVariable String city){
-		  
-		  return service.getByCity(city);
-		  
-	  }
-	  @GetMapping("/getByRating/{rating}")
-	  public List<Hotels> getByRating(@PathVariable Double rating){
-		  
-		  return service.getByRating(rating);
-		  
-	  }
-	  
+		return "Record deleted for hotelId" + hotelId;
+	}
+
+	@GetMapping("/getbyid/{hotelId}")
+	public Hotels getById(@PathVariable Integer hotelId) {
+		Hotels hotel = null;
+		hotel = service.getHotelById(hotelId);
+		if (hotel == null) {
+			throw new HotelNotFoundException();
+		}
+		return hotel;
+
+	}
+
+	@GetMapping("/getall")
+	public List<Hotels> getAll() {
+
+		return service.getAllHotels();
+
+	}
+
+	@GetMapping("/getByCity/{city}")
+	public List<Hotels> getByCity(@PathVariable String city) {
+
+		return service.getByCity(city);
+
+	}
+
+	@GetMapping("/getByRating/{rating}")
+	public List<Hotels> getByRating(@PathVariable Double rating) {
+
+		return service.getByRating(rating);
+
+	}
 
 }

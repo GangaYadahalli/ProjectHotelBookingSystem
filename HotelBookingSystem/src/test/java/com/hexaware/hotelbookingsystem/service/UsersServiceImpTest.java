@@ -12,11 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.hexaware.hotelbookingsystem.dto.UsersDto;
 import com.hexaware.hotelbookingsystem.entities.Users;
 
-
-
 @SpringBootTest
 class UsersServiceImpTest {
-	
+
 	@Autowired
 	IUsersService service;
 
@@ -27,31 +25,31 @@ class UsersServiceImpTest {
 	@Test
 	@Disabled
 	void testAddUsers() {
-	
-		UsersDto userDto=new UsersDto();
-		Users user=service.addUsers(userDto);
-		
+
+		UsersDto userDto = new UsersDto();
+		Users user = service.addUsers(userDto);
+
 		assertNotNull(user);
 	}
 
 	@Test
 	@Disabled
 	void testUpdateUsers() {
-		UsersDto userDto=new UsersDto();
-		Users user=service.updateUsers(userDto);
-		
+		UsersDto userDto = new UsersDto();
+		Users user = service.updateUsers(userDto);
+
 		assertNotNull(user);
-		
+
 	}
 
 	@Test
 	@Disabled
 	void testGetUsersById() {
-		
+
 		Users user = service.getUsersById(1);
 
 		assertEquals("Ganga", user.getName());
-		
+
 	}
 
 	@Test
@@ -61,7 +59,7 @@ class UsersServiceImpTest {
 //		int user=service.deleteUsersById(2);
 //
 //		assertNotNull(user);
-		
+
 	}
 
 }

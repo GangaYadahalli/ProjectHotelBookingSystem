@@ -2,9 +2,8 @@ package com.hexaware.hotelbookingsystem.dto;
 
 import java.time.LocalDate;
 
-
 public class UsersDto {
-	
+
 	private Integer userId;
 	private String email;
 	private String password;
@@ -13,9 +12,9 @@ public class UsersDto {
 	private LocalDate dateCreated;
 	private UserRole userrole;
 	private LocalDate updatedAt;
-	
+
 	public enum UserRole {
-		GUEST, HOTELOWNER , ADMIN
+		GUEST, HOTELOWNER, ADMIN
 	}
 
 	public UsersDto(Integer userId, String email, String password, String name, Long phoneNumber, LocalDate dateCreated,
@@ -98,8 +97,5 @@ public class UsersDto {
 	public void setUpdatedAt(LocalDate updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
-
-
 
 }

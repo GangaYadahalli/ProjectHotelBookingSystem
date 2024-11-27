@@ -7,90 +7,47 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.hexaware.hotelbookingsystem.dto.ReviewsDto;
 import com.hexaware.hotelbookingsystem.entities.Reviews;
+import com.hexaware.hotelbookingsystem.exception.ReviewNotFoundException;
 import com.hexaware.hotelbookingsystem.service.IReviewsService;
 
-
 @RestController
-@RequestMapping("/reviews")
+@RequestMapping("/api/reviews")
 public class ReviewsController {
 
     @Autowired
-    private IReviewsService reviewsService;
+    IReviewsService service;
 
-    // 1. Add a new review
-    @PostMapping
-    public ResponseEntity<Reviews> addReview(@RequestBody Reviews review) {
-        Reviews addedReview = reviewsService.addReview(review);
-        return new ResponseEntity<>(addedReview, HttpStatus.CREATED);
+    @PostMapping("/add")
+    public Reviews addReview(@RequestBody ReviewsDto reviewsDto) {
+        return service.addReview(reviewsDto);
+    }
+/*
+    @PutMapping("/update/{reviewId}")
+    public Reviews updateReview(@PathVariable Integer reviewId, @RequestBody Reviews updatedReview) {
+        updatedReview.setReviewId(reviewId); // Ensure the ID remains unchanged
+        return service.updateReview(updatedReview);
+    }
+*/
+    @DeleteMapping("/delete/{reviewId}")
+    public String deleteReview(@PathVariable Integer reviewId) {
+        service.deleteReviewById(reviewId);
+        return "Review with ID " + reviewId + " deleted.";
     }
 
-    // 2. Get a review by ID
-    @GetMapping("/{reviewId}")
-    public ResponseEntity<Reviews> getReviewById(@PathVariable Integer reviewId) {
-        Reviews review = reviewsService.getReviewById(reviewId);
-        if (review != null) {
-            return new ResponseEntity<>(review, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @GetMapping("/getbyid/{reviewId}")
+    public Reviews getReviewById(@PathVariable Integer reviewId) {
+        Reviews review = service.getReviewById(reviewId);
+        if (review == null) {
+            throw new ReviewNotFoundException("Review not found for ID: " + reviewId);
         }
+        return review;
     }
 
-    // 3. Get all reviews for a specific hotel
-    @GetMapping("/hotel/{hotelId}")
-    public ResponseEntity<List<Reviews>> getReviewsByHotelId(@PathVariable Integer hotelId) {
-        List<Reviews> reviews = reviewsService.getReviewsByHotelId(hotelId);
-        if (reviews != null && !reviews.isEmpty()) {
-            return new ResponseEntity<>(reviews, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 
-    // 4. Get all reviews by a specific user
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Reviews>> getReviewsByUserId(@PathVariable Integer userId) {
-        List<Reviews> reviews = reviewsService.getReviewsByUserId(userId);
-        if (reviews != null && !reviews.isEmpty()) {
-            return new ResponseEntity<>(reviews, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    // 5. Update an existing review
-    @PutMapping("/{reviewId}")
-    public ResponseEntity<Reviews> updateReview(@PathVariable Integer reviewId, @RequestBody Reviews updatedReview) {
-        Reviews existingReview = reviewsService.getReviewById(reviewId);
-        if (existingReview != null) {
-            updatedReview.setReviewId(reviewId); // Ensure the ID remains unchanged
-            Reviews updated = reviewsService.updateReview(updatedReview);
-            return new ResponseEntity<>(updated, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    // 6. Delete a review by ID
-    @DeleteMapping("/{reviewId}")
-    public ResponseEntity<Void> deleteReviewById(@PathVariable Integer reviewId) {
-        Reviews existingReview = reviewsService.getReviewById(reviewId);
-        if (existingReview != null) {
-            reviewsService.deleteReviewById(reviewId);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    // 7. Get the average rating for a specific hotel
-    @GetMapping("/hotel/{hotelId}/average-rating")
-    public ResponseEntity<Double> getAverageRatingByHotelId(@PathVariable Integer hotelId) {
-        Double averageRating = reviewsService.getAverageRatingByHotelId(hotelId);
-        if (averageRating != null) {
-            return new ResponseEntity<>(averageRating, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/average-rating/{hotelId}")
+    public Double getAverageRatingByHotelId(@PathVariable Integer hotelId) {
+        return service.getAverageRatingByHotelId(hotelId);
     }
 }

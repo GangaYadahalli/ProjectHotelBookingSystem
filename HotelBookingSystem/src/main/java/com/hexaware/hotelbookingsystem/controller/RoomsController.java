@@ -22,54 +22,57 @@ import com.hexaware.hotelbookingsystem.service.IRoomsService;
 public class RoomsController {
 	@Autowired
 	IRoomsService service;
-	
+
 	@PostMapping("/insert")
-	  public  Rooms  insert(@RequestBody RoomsDto roomDto) {
-		
-		return  service.addRooms(roomDto);
-	  }
+	public Rooms insert(@RequestBody RoomsDto roomDto) {
+
+		return service.addRooms(roomDto);
+	}
+
 	@PutMapping("/update")
-	  public Rooms   update(@RequestBody RoomsDto roomDto) {
-		
-		  return service.updateRooms(roomDto);
-		  
-	  }
+	public Rooms update(@RequestBody RoomsDto roomDto) {
+
+		return service.updateRooms(roomDto);
+
+	}
+
 	@DeleteMapping("/delete/{roomId}")
-	  public String   delete(@PathVariable  Integer roomId) {
-		  
+	public String delete(@PathVariable Integer roomId) {
+
 		service.deleteRoomsById(roomId);
-		return "Record deleted for roomId" +roomId;
-	  }
-	  
-	  @GetMapping("/getbyid/{roomId}")
-	  public  Rooms  getById(@PathVariable Integer roomId) {
-		  Rooms room=null;
-		  room= service.getRoomById(roomId);
-			    if (room == null) {
-			        throw new RoomNotFoundException();
-			    }
-			    return room;
-		  
-	  }
-	  
-	  @GetMapping("/getall")
-	  public List<Rooms>  getAll(){
-		  
-		  return service.getAllRooms();
-		  
-	  }
-	  
-		@PutMapping("/updatePricePerNight/{price}/{id}")
-		  public int  updatePricePerNight(@PathVariable Integer price ,@PathVariable Integer id) {
-			
-			  return service.updatepricePerNight(price, id);
-			  
-		  }
-		@PutMapping("/updateCapacity/{capacity}/{id}")
-		  public int  updateCapacity(@PathVariable Integer capacity ,@PathVariable Integer id) {
-			
-			  return service.updateCapacity(capacity, id);
-			  
-		  }
+		return "Record deleted for roomId" + roomId;
+	}
+
+	@GetMapping("/getbyid/{roomId}")
+	public Rooms getById(@PathVariable Integer roomId) {
+		Rooms room = null;
+		room = service.getRoomById(roomId);
+		if (room == null) {
+			throw new RoomNotFoundException();
+		}
+		return room;
+
+	}
+
+	@GetMapping("/getall")
+	public List<Rooms> getAll() {
+
+		return service.getAllRooms();
+
+	}
+
+	@PutMapping("/updatePricePerNight/{price}/{id}")
+	public int updatePricePerNight(@PathVariable Integer price, @PathVariable Integer id) {
+
+		return service.updatepricePerNight(price, id);
+
+	}
+
+	@PutMapping("/updateCapacity/{capacity}/{id}")
+	public int updateCapacity(@PathVariable Integer capacity, @PathVariable Integer id) {
+
+		return service.updateCapacity(capacity, id);
+
+	}
 
 }

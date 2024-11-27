@@ -1,5 +1,6 @@
 package com.hexaware.hotelbookingsystem.entities;
-	import java.util.List;
+
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,142 +13,139 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-	@Entity
-	public class Rooms {
-			@Id
-			private Integer roomId;
-	         
-			@Column(unique = true)
-		    private Integer roomNumber; 
-			
-			@Enumerated(EnumType.STRING)
-			private RoomType roomType; 
-			
-			private Double pricePerNight;   
-			
-			@Enumerated(EnumType.STRING)
-			private AvailabilityStatus availabilityStatus; 
-			
-			private Integer capacity;           
-			private String description;
-			
-		
-			@ManyToOne
-		    @JoinColumn(name = "hotel_id")
-		    private Hotels hotel; 
+@Entity
+public class Rooms {
+	@Id
+	private Integer roomId;
 
-		    @OneToMany(mappedBy = "room")
-		    private List<Bookings> bookings; 
-		    
-		    @ManyToMany
-		    @JoinTable(
-		        name = "user_favorite_rooms", 
-		        joinColumns = @JoinColumn(name = "room_id"), 
-		        inverseJoinColumns = @JoinColumn(name = "user_id")  
-		    )
-		    
-		    private List<Users> users;
-			public enum RoomType {
-				SINGLE, DOUBLE, SUITE
-			}
-			
-			public enum AvailabilityStatus {
-				AVAILABLE, BOOKED
-			}
-			public Rooms() {
-				super();
-			}
-		
-			public Rooms(Integer roomId, Integer roomNumber, RoomType roomType, Double pricePerNight,
-					AvailabilityStatus availabilityStatus, Integer capacity, String description) {
-				super();
-				this.roomId = roomId;
-				this.roomNumber = roomNumber;
-				this.roomType = roomType;
-				this.pricePerNight = pricePerNight;
-				this.availabilityStatus = availabilityStatus;
-				this.capacity = capacity;
-				this.description = description;
-			}
+	@Column(unique = true)
+	private Integer roomNumber;
 
-			public Integer getRoomId() {
-				return roomId;
-			}
+	@Enumerated(EnumType.STRING)
+	private RoomType roomType;
 
-			public void setRoomId(Integer roomId) {
-				this.roomId = roomId;
-			}
+	private Double pricePerNight;
 
-			public Integer getRoomNumber() {
-				return roomNumber;
-			}
+	@Enumerated(EnumType.STRING)
+	private AvailabilityStatus availabilityStatus;
 
-			public void setRoomNumber(Integer roomNumber) {
-				this.roomNumber = roomNumber;
-			}
+	private Integer capacity;
+	private String description;
 
-			public RoomType getRoomType() {
-				return roomType;
-			}
+	@ManyToOne
+	@JoinColumn(name = "hotel_id")
+	private Hotels hotel;
 
-			public void setRoomType(RoomType roomType) {
-				this.roomType = roomType;
-			}
+	@OneToMany(mappedBy = "room")
+	private List<Bookings> bookings;
 
-			public Double getPricePerNight() {
-				return pricePerNight;
-			}
+	@ManyToMany
+	@JoinTable(name = "user_favorite_rooms", joinColumns = @JoinColumn(name = "room_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 
-			public void setPricePerNight(Double pricePerNight) {
-				this.pricePerNight = pricePerNight;
-			}
+	private List<Users> users;
 
-			public AvailabilityStatus getAvailabilityStatus() {
-				return availabilityStatus;
-			}
+	public enum RoomType {
+		SINGLE, DOUBLE, SUITE
+	}
 
-			public void setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
-				this.availabilityStatus = availabilityStatus;
-			}
+	public enum AvailabilityStatus {
+		AVAILABLE, BOOKED
+	}
 
-			public Integer getCapacity() {
-				return capacity;
-			}
+	public Rooms() {
+		super();
+	}
 
-			public void setCapacity(Integer capacity) {
-				this.capacity = capacity;
-			}
+	public Rooms(Integer roomId, Integer roomNumber, RoomType roomType, Double pricePerNight,
+			AvailabilityStatus availabilityStatus, Integer capacity, String description) {
+		super();
+		this.roomId = roomId;
+		this.roomNumber = roomNumber;
+		this.roomType = roomType;
+		this.pricePerNight = pricePerNight;
+		this.availabilityStatus = availabilityStatus;
+		this.capacity = capacity;
+		this.description = description;
+	}
 
-			public String getDescription() {
-				return description;
-			}
+	public Integer getRoomId() {
+		return roomId;
+	}
 
-			public void setDescription(String description) {
-				this.description = description;
-			}
+	public void setRoomId(Integer roomId) {
+		this.roomId = roomId;
+	}
 
-			public Hotels getHotel() {
-				return hotel;
-			}
+	public Integer getRoomNumber() {
+		return roomNumber;
+	}
 
-			public void setHotel(Hotels hotel) {
-				this.hotel = hotel;
-			}
+	public void setRoomNumber(Integer roomNumber) {
+		this.roomNumber = roomNumber;
+	}
 
-			public List<Bookings> getBookings() {
-				return bookings;
-			}
+	public RoomType getRoomType() {
+		return roomType;
+	}
 
-			public void setBookings(List<Bookings> bookings) {
-				this.bookings = bookings;
-			}
+	public void setRoomType(RoomType roomType) {
+		this.roomType = roomType;
+	}
 
-			public List<Users> getUsers() {
-				return users;
-			}
+	public Double getPricePerNight() {
+		return pricePerNight;
+	}
 
-			public void setUsers(List<Users> users) {
-				this.users = users;
-			}
+	public void setPricePerNight(Double pricePerNight) {
+		this.pricePerNight = pricePerNight;
+	}
+
+	public AvailabilityStatus getAvailabilityStatus() {
+		return availabilityStatus;
+	}
+
+	public void setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
+		this.availabilityStatus = availabilityStatus;
+	}
+
+	public Integer getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Hotels getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotels hotel) {
+		this.hotel = hotel;
+	}
+
+	public List<Bookings> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Bookings> bookings) {
+		this.bookings = bookings;
+	}
+
+	public List<Users> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<Users> users) {
+		this.users = users;
+	}
 
 }

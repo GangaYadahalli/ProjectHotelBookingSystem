@@ -16,169 +16,166 @@ import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-	@Entity
-	public class Users {
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY) 
-		private Integer userId;
-		
-		
-		@Pattern(regexp="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,6}$" , message="enter a valid email")
-		private String email;
-		
-		@NotNull
-		private String password;
-		
-		
-		@Pattern(regexp="^[a-zA-Z]{2,50}$", message="Name should only contain letters and be 2 to 50 characters long")
-		private String name;
-		
-		@Pattern(regexp="^[0-9]{10}$", message="Phone number must be exactly 10 digits")
-		private Long phoneNumber;
-		
-		private LocalDate dateCreated;
-		
-		@Enumerated(EnumType.STRING)
-		private UserRole userrole;
-		
-		private LocalDate updatedAt;
-		
-		@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
-	    private Hotels hotel; 
 
-	    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
-	    private List<Bookings> bookings; 
+@Entity
+public class Users {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer userId;
 
-	    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
-	    private List<Reviews> reviews; 
-	    
-	    @OneToMany(mappedBy="user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
-	    private List<Payments> payments;
-	    
-		public enum UserRole {
-			GUEST, HOTELOWNER , ADMIN
-		}
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,6}$", message = "enter a valid email")
+	private String email;
 
-		public Users() {
-			super();
-		}
+	@NotNull
+	private String password;
 
-		public Users(Integer userId, String email, String password, String name, Long phoneNumber,
-				LocalDate dateCreated, UserRole userrole, LocalDate updatedAt) {
-			super();
-			this.userId = userId;
-			this.email = email;
-			this.password = password;
-			this.name = name;
-			this.phoneNumber = phoneNumber;
-			this.dateCreated = dateCreated;
-			this.userrole = userrole;
-			this.updatedAt = updatedAt;
-		}
+	@Pattern(regexp = "^[a-zA-Z]{2,50}$", message = "Name should only contain letters and be 2 to 50 characters long")
+	private String name;
 
-		public Integer getUserId() {
-			return userId;
-		}
+	@Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be exactly 10 digits")
+	private Long phoneNumber;
 
-		public void setUserId(Integer userId) {
-			this.userId = userId;
-		}
+	private LocalDate dateCreated;
 
-		public String getEmail() {
-			return email;
-		}
+	@Enumerated(EnumType.STRING)
+	private UserRole userrole;
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
+	private LocalDate updatedAt;
 
-		public String getPassword() {
-			return password;
-		}
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Hotels hotel;
 
-		public void setPassword(String password) {
-			this.password = password;
-		}
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Bookings> bookings;
 
-		public String getName() {
-			return name;
-		}
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Reviews> reviews;
 
-		public void setName(String name) {
-			this.name = name;
-		}
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Payments> payments;
 
-		public Long getPhoneNumber() {
-			return phoneNumber;
-		}
+	public enum UserRole {
+		GUEST, HOTELOWNER, ADMIN
+	}
 
-		public void setPhoneNumber(Long phoneNumber) {
-			this.phoneNumber = phoneNumber;
-		}
+	public Users() {
+		super();
+	}
 
-		public LocalDate getDateCreated() {
-			return dateCreated;
-		}
+	public Users(Integer userId, String email, String password, String name, Long phoneNumber, LocalDate dateCreated,
+			UserRole userrole, LocalDate updatedAt) {
+		super();
+		this.userId = userId;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.dateCreated = dateCreated;
+		this.userrole = userrole;
+		this.updatedAt = updatedAt;
+	}
 
-		public void setDateCreated(LocalDate dateCreated) {
-			this.dateCreated = dateCreated;
-		}
+	public Integer getUserId() {
+		return userId;
+	}
 
-		public UserRole getUserrole() {
-			return userrole;
-		}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-		public void setUserrole(UserRole userrole) {
-			this.userrole = userrole;
-		}
+	public String getEmail() {
+		return email;
+	}
 
-		public LocalDate getUpdatedAt() {
-			return updatedAt;
-		}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-		public void setUpdatedAt(LocalDate updatedAt) {
-			this.updatedAt = updatedAt;
-		}
+	public String getPassword() {
+		return password;
+	}
 
-		public Hotels getHotel() {
-			return hotel;
-		}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-		public void setHotel(Hotels hotel) {
-			this.hotel = hotel;
-		}
+	public String getName() {
+		return name;
+	}
 
-		public List<Bookings> getBookings() {
-			return bookings;
-		}
+	public void setName(String name) {
+		this.name = name;
+	}
 
-		public void setBookings(List<Bookings> bookings) {
-			this.bookings = bookings;
-		}
+	public Long getPhoneNumber() {
+		return phoneNumber;
+	}
 
-		public List<Reviews> getReviews() {
-			return reviews;
-		}
+	public void setPhoneNumber(Long phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
-		public void setReviews(List<Reviews> reviews) {
-			this.reviews = reviews;
-		}
+	public LocalDate getDateCreated() {
+		return dateCreated;
+	}
 
-		public List<Payments> getPayments() {
-			return payments;
-		}
+	public void setDateCreated(LocalDate dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 
-		public void setPayments(List<Payments> payments) {
-			this.payments = payments;
-		}
+	public UserRole getUserrole() {
+		return userrole;
+	}
 
-		@Override
-		public String toString() {
-			return "Users [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name
-					+ ", phoneNumber=" + phoneNumber + ", dateCreated=" + dateCreated + ", userrole=" + userrole
-					+ ", updatedAt=" + updatedAt + "]";
-		}
-		
+	public void setUserrole(UserRole userrole) {
+		this.userrole = userrole;
+	}
 
+	public LocalDate getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDate updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Hotels getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotels hotel) {
+		this.hotel = hotel;
+	}
+
+	public List<Bookings> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Bookings> bookings) {
+		this.bookings = bookings;
+	}
+
+	public List<Reviews> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Reviews> reviews) {
+		this.reviews = reviews;
+	}
+
+	public List<Payments> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payments> payments) {
+		this.payments = payments;
+	}
+
+	@Override
+	public String toString() {
+		return "Users [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name
+				+ ", phoneNumber=" + phoneNumber + ", dateCreated=" + dateCreated + ", userrole=" + userrole
+				+ ", updatedAt=" + updatedAt + "]";
+	}
 
 }

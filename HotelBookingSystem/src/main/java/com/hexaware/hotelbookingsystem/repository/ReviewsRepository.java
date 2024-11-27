@@ -16,8 +16,7 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Integer> {
 	List<Reviews> findByUser_UserId(Integer userId);
 
 // Calculate the average rating for a specific hotel
-    @Query("SELECT AVG(r.rating) FROM Reviews r WHERE r.hotel.id = :hotelId")
-    Double getAverageRatingByHotelId(@Param("hotelId") Integer hotelId);
- 	
-	
+	@Query("SELECT AVG(r.rating) FROM Reviews r WHERE r.hotel.id = :hotelId")
+	Double getAverageRatingByHotelId(@Param("hotelId") Integer hotelId);
+
 }

@@ -2,23 +2,24 @@ package com.hexaware.hotelbookingsystem.service;
 
 import java.util.List;
 
+import com.hexaware.hotelbookingsystem.dto.PaymentsDto;
 import com.hexaware.hotelbookingsystem.entities.Payments;
 
 public interface IPaymentsService {
 
 	// Processes a new payment
-    Payments processPayment(Payments payment);
+	Payments processPayment(PaymentsDto paymentDto);
 
-    // Retrieves a payment by its ID
-    Payments getPaymentById(Integer paymentId);
+	// Retrieves a payment by its ID
+	Payments getPaymentById(Integer paymentId);
 
-    // Retrieves all payments made by a specific user
-    List<Payments> getPaymentsByUserId(Integer userId);
+	// Updates the status of a payment
+	Payments updatePayment(Payments payment);
+	
+	// Retrieves all payments (optional for admin views or reporting)
+    List<Payments> getAllPayments();
 
-    // Retrieves all payments for a specific booking
-    List<Payments> getPaymentsByBookingId(Integer bookingId);
+    // Deletes a payment by its ID
+    void deletePaymentById(Integer paymentId);
 
-    // Updates the status of a payment
-    Payments updatePaymentStatus(Payments payment);
-  
 }

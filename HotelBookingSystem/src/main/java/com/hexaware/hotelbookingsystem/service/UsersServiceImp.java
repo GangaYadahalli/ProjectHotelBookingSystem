@@ -11,19 +11,18 @@ import com.hexaware.hotelbookingsystem.repository.UsersRepository;
 
 import jakarta.transaction.Transactional;
 
-
 @Transactional
 @Service
 public class UsersServiceImp implements IUsersService {
-	
-	@Autowired 
+
+	@Autowired
 	UsersRepository repo;
-	
+
 	@Override
 	public Users addUsers(UsersDto userDto) {
-		
+
 		Users user = new Users();
-		
+
 		user.setUserId(userDto.getUserId());
 		user.setEmail(userDto.getEmail());
 		user.setPassword(userDto.getPassword());
@@ -32,18 +31,15 @@ public class UsersServiceImp implements IUsersService {
 		user.setDateCreated(userDto.getDateCreated());
 		user.setUserrole(Users.UserRole.valueOf(userDto.getUserrole().name()));
 		user.setUpdatedAt(userDto.getUpdatedAt());
-		
-	
-		
+
 		return repo.save(user);
 	}
-	
 
 	@Override
 	public Users updateUsers(UsersDto userDto) {
-		
-        Users user = new Users();
-		
+
+		Users user = new Users();
+
 		user.setUserId(userDto.getUserId());
 		user.setEmail(userDto.getEmail());
 		user.setPassword(userDto.getPassword());
@@ -52,54 +48,46 @@ public class UsersServiceImp implements IUsersService {
 		user.setDateCreated(userDto.getDateCreated());
 		user.setUserrole(Users.UserRole.valueOf(userDto.getUserrole().name()));
 		user.setUpdatedAt(userDto.getUpdatedAt());
-		
-		
+
 		return repo.save(user);
 	}
 
 	@Override
 	public Users getUsersById(Integer userId) {
-		
+
 		return repo.findById(userId).orElse(null);
 	}
 
 	@Override
 	public void deleteUsersById(Integer userId) {
-		
+
 		repo.deleteById(userId);
-		
+
 	}
 
 	@Override
 	public List<Users> getAllUsers() {
-		
+
 		return repo.findAll();
 	}
 
-
 	@Override
 	public int deleteByName(String name) {
-		
+
 		return repo.deleteByName(name);
 	}
 
-
 	@Override
 	public int updatePhoneNumber(Long phoneNumber, Integer userId) {
-		
+
 		return repo.updatePhoneNumber(phoneNumber, userId);
 	}
 
-
 	@Override
 	public int updatePassword(String password, Integer userId) {
-		
+
 		return repo.updatePassword(password, userId);
 	}
-
-
-
-
 
 //	@Override
 //	public void deleteByName(String name) {
@@ -118,7 +106,5 @@ public class UsersServiceImp implements IUsersService {
 //		
 //		return repo.updatePassword(password, userId);
 //	}
-
-
 
 }

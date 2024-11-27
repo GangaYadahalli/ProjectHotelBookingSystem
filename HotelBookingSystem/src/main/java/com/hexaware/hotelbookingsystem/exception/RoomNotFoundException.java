@@ -1,5 +1,5 @@
 package com.hexaware.hotelbookingsystem.exception;
 
-public class RoomNotFoundException extends RuntimeException{
+public class RoomNotFoundException extends RuntimeException {
 
 }

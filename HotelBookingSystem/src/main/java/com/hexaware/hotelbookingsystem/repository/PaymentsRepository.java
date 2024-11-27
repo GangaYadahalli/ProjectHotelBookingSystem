@@ -13,9 +13,9 @@ public interface PaymentsRepository extends JpaRepository<Payments, Integer> {
 	List<Payments> findByUser_UserId(Integer userId);
 
 	List<Payments> findByBooking_BookingId(Integer bookingId);
-	
+
 	// Update payment status (custom query if required)
-    @Query("SELECT p FROM Payments p WHERE p.paymentId = :paymentId")
-    Optional<Payments> findPaymentById(@Param("paymentId") Integer paymentId);
+	@Query("SELECT p FROM Payments p WHERE p.paymentId = :paymentId")
+	Optional<Payments> findPaymentById(@Param("paymentId") Integer paymentId);
 
 }

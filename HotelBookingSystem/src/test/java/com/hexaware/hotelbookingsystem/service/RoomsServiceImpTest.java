@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class RoomsServiceImpTest {
-	
+
 	@Autowired
 	IRoomsService service;
 
@@ -19,37 +19,37 @@ class RoomsServiceImpTest {
 
 	@Test
 	void testAddRooms() {
-		
+
 	}
 
 	@Test
 	void testUpdateRooms() {
-		
+
 	}
 
 	@Test
 	void testGetRoomById() {
-		
+
 	}
 
 	@Test
 	void testDeleteRoomsById() {
-		
+
 	}
 
 	@Test
 	void testGetAllRooms() {
-		
+
 	}
 
 	@Test
 	void testUpdatepricePerNight() {
-		
+
 	}
 
 	@Test
 	void testUpdateCapacity() {
-		
+
 	}
 
 }
