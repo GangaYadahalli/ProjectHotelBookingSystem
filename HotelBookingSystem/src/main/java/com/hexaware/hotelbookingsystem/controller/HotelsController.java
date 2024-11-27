@@ -58,7 +58,7 @@ public class HotelsController {
 	  }
 	  
 	@GetMapping("/getbyid/{hotelId}")
-	@PreAuthorize("hasAuthority('GUEST')")
+	//@PreAuthorize("hasAuthority('GUEST')")
 	public  Hotels  getById(@PathVariable Integer hotelId) {
 		  Hotels hotel=null;
 		  hotel= service.getHotelById(hotelId);
